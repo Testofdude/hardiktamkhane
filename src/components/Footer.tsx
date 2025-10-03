@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Youtube } from "lucide-react";
+import { Linkedin, Mail, Youtube } from "lucide-react";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -49,15 +49,6 @@ export const Footer = () => {
 
           {/* Social Links */}
           <div className="flex gap-3">
-            <a
-              href="https://github.com/hardiktamkhane"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-xl glass flex items-center justify-center hover:shadow-lg hover:shadow-primary/30 hover:scale-110 transition-all"
-              aria-label="GitHub"
-            >
-              <Github className="w-5 h-5" />
-            </a>
             <a
               href="https://www.linkedin.com/in/hardik-tamkhane-003679340/"
               target="_blank"

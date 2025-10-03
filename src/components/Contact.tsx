@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Mail, MapPin, Send, Github, Linkedin, Youtube } from "lucide-react";
+import { Mail, MapPin, Send, Linkedin, Youtube } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -117,15 +117,6 @@ export const Contact = () => {
             <div className="pt-6">
               <div className="font-semibold mb-4">Connect with me</div>
               <div className="flex gap-3">
-                <a
-                  href="https://github.com/hardiktamkhane"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-2xl glass flex items-center justify-center hover:shadow-lg hover:shadow-primary/30 hover:scale-110 transition-all"
-                  aria-label="GitHub Profile"
-                >
-                  <Github className="w-5 h-5" />
-                </a>
                 <a
                   href="https://www.linkedin.com/in/hardik-tamkhane-003679340/"
                   target="_blank"
