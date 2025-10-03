@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Premium Modern Theme - HSL Colors */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 5%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 5%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Vibrant Purple-Blue Primary */
+    --primary: 263 70% 65%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 263 70% 75%;
+
+    /* Soft Secondary */
+    --secondary: 240 5% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    /* Cyan Accent */
+    --accent: 189 94% 43%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 189 94% 53%;
+
+    --muted: 240 5% 12%;
+    --muted-foreground: 240 5% 64%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 6% 15%;
+    --input: 240 6% 15%;
+    --ring: 263 70% 65%;
+
+    --radius: 1rem;
+
+    /* Premium Design Tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(263 70% 65%), hsl(189 94% 43%));
+    --gradient-accent: linear-gradient(135deg, hsl(189 94% 43%), hsl(263 70% 65%));
+    --gradient-hero: linear-gradient(135deg, hsl(263 70% 65% / 0.9), hsl(189 94% 43% / 0.9));
+    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(263 70% 65% / 0.25), transparent 70%);
+    --gradient-mesh: 
+      radial-gradient(at 30% 20%, hsl(263 70% 65% / 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 10%, hsl(189 94% 43% / 0.12) 0px, transparent 50%),
+      radial-gradient(at 10% 60%, hsl(263 70% 65% / 0.10) 0px, transparent 50%),
+      radial-gradient(at 90% 90%, hsl(189 94% 43% / 0.08) 0px, transparent 50%);
+    
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 4px 12px -2px hsl(0 0% 0% / 0.4);
+    --shadow-lg: 0 10px 30px -5px hsl(0 0% 0% / 0.5);
+    --shadow-xl: 0 20px 40px -10px hsl(0 0% 0% / 0.6);
+    --shadow-glow: 0 0 60px hsl(263 70% 65% / 0.4), 0 0 100px hsl(263 70% 65% / 0.2);
+    --shadow-glow-accent: 0 0 60px hsl(189 94% 43% / 0.4), 0 0 100px hsl(189 94% 43% / 0.2);
+    --shadow-inner: inset 0 2px 8px 0 hsl(0 0% 0% / 0.2);
+    
+    /* Glass morphism */
+    --glass-bg: hsl(240 10% 5% / 0.6);
+    --glass-border: hsl(0 0% 100% / 0.08);
+    --glass-strong: hsl(240 10% 5% / 0.8);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus visible for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-strong {
+    background: var(--glass-strong);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid hsl(0 0% 100% / 0.12);
+  }
+
+  /* Gradient text effect */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Animated gradient border */
+  .gradient-border {
+    position: relative;
+    background: var(--background);
+    border-radius: var(--radius);
+  }
+
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: var(--gradient-primary);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  /* Mesh gradient background */
+  .mesh-gradient {
+    background: var(--gradient-mesh);
+  }
+
+  /* Advanced animations */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 30px hsl(263 70% 65% / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 60px hsl(263 70% 65% / 0.5), 0 0 80px hsl(189 94% 43% / 0.3);
+    }
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(0 0% 100% / 0.1),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
