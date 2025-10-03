@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Youtube } from "lucide-react";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -59,13 +59,22 @@ export const Footer = () => {
               <Github className="w-5 h-5" />
             </a>
             <a
-              href="https://linkedin.com/in/hardiktamkhane"
+              href="https://www.linkedin.com/in/hardik-tamkhane-003679340/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-xl glass flex items-center justify-center hover:shadow-lg hover:shadow-primary/30 hover:scale-110 transition-all"
               aria-label="LinkedIn"
             >
               <Linkedin className="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.youtube.com/@Hardik_SMFCYA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-xl glass flex items-center justify-center hover:shadow-lg hover:shadow-primary/30 hover:scale-110 transition-all"
+              aria-label="YouTube"
+            >
+              <Youtube className="w-5 h-5" />
             </a>
             <a
               href="mailto:hardiktamkhane632@gmail.com"
