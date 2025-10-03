@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Award, BookOpen, Trophy, Sparkles } from "lucide-react";
+import { Award, BookOpen, Trophy, Sparkles, TrendingUp, Coins } from "lucide-react";
 
 const achievements = [
   {
@@ -10,10 +10,22 @@ const achievements = [
     year: "Class 5th",
   },
   {
+    icon: Coins,
+    title: "Crypto Enthusiast",
+    description: "Started exploring cryptocurrency and blockchain technology",
+    year: "Class 6th",
+  },
+  {
+    icon: TrendingUp,
+    title: "Finance Enthusiast",
+    description: "Developed passion for finance, investing, and trading",
+    year: "Class 6th",
+  },
+  {
     icon: Trophy,
     title: "Founded Fusion Interpreter",
     description: "Performance marketing agency specializing in Meta & LinkedIn ads",
-    year: "Class 8th",
+    year: "Class 7th",
   },
   {
     icon: BookOpen,
@@ -53,7 +65,7 @@ export const Achievements = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {achievements.map((achievement, index) => (
             <motion.div
               key={achievement.title}
