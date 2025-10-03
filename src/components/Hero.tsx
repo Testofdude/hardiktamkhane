@@ -192,8 +192,7 @@ export const Hero = () => {
               variants={itemVariants}
               className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl"
             >
-              Building innovative digital products at the intersection of code, marketing, and security. 
-              Started coding in Class 5, published a finance book in Class 7, and founded Fusion Interpreter in 2023.
+              ⚡Serial Entrepreneur (Cyvance, Fusion Interpreter) | 🛡️Cybersecurity Expert | 💻Frontend Developer + 📈Performance Marketing Expert | 📚Published Author | 💹Crypto Trader
             </motion.p>
 
             {/* Call-to-action buttons */}
