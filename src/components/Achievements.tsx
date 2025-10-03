@@ -7,25 +7,25 @@ const achievements = [
     icon: Sparkles,
     title: "Started IT Experience",
     description: "Began journey in information technology and programming",
-    year: "2021",
+    year: "Class 5th",
   },
   {
     icon: Trophy,
     title: "Founded Fusion Interpreter",
     description: "Performance marketing agency specializing in Meta & LinkedIn ads",
-    year: "2023",
+    year: "Class 8th",
   },
   {
     icon: BookOpen,
     title: "Published Author",
     description: "Published finance book covering investing and trading",
-    year: "2024",
+    year: "Class 8th",
   },
   {
     icon: Award,
     title: "Founded Cyvance Security",
     description: "Launched cybersecurity solutions company",
-    year: "2026",
+    year: "Class 8th",
   },
 ];
 
