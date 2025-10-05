@@ -79,7 +79,7 @@ export const About = () => {
             About <span className="gradient-text bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Me</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            From author to entrepreneur, my journey is driven by curiosity and innovation
+            From publishing my first book to founding two startups—driven by execution, not just ideas
           </p>
         </motion.div>
 
@@ -94,30 +94,28 @@ export const About = () => {
           >
             <motion.div variants={itemVariants}>
               <h3 className="text-2xl md:text-3xl font-display font-bold mb-4">
-                From Curiosity to Creation
+                Building, Shipping, Scaling
               </h3>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                My entrepreneurial journey began in Class 5 with my first lines of code. By Class 7, I had published 
-                a book on finance, exploring investing fundamentals and marketing strategies. That early passion for 
-                learning and creating has shaped everything I do.
+                I started coding at 10, published my first finance book at 13, and launched my first startup before turning 15. 
+                Not because I had it all figured out—but because I believed execution beats perfection.
               </p>
             </motion.div>
 
             <motion.div variants={itemVariants}>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                Today, I'm the founder of <span className="text-foreground font-semibold">Fusion Interpreter</span>, 
-                a performance marketing agency specializing in data-driven Meta and LinkedIn advertising. I combine frontend 
-                development expertise with strategic marketing to help businesses scale through conversion-optimized digital experiences.
+                Today, I run <span className="text-foreground font-semibold">Fusion Interpreter</span>, a performance marketing 
+                agency helping brands scale with data-driven Meta and LinkedIn campaigns. And I'm building{" "}
+                <span className="text-foreground font-semibold">Cyvance Security</span>, where we solve real cybersecurity 
+                challenges—penetration testing, risk assessment, and cloud infrastructure protection for businesses that can't afford breaches.
               </p>
             </motion.div>
 
             <motion.div variants={itemVariants}>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                I'm also building <span className="text-foreground font-semibold">Cyvance Security</span>, a cybersecurity 
-                firm focused on penetration testing, risk assessment, and cloud security infrastructure. My technical foundation 
-                spans modern web development, Linux systems, and advanced security protocols. I'm also growing my YouTube channel, 
-                sharing educational content on finance, marketing, and technology—bridging technical excellence with strategic 
-                thinking to create meaningful impact in the digital economy.
+                I've shipped 35+ projects, earned certifications in cybersecurity and digital marketing, and built systems that work at scale. 
+                My roadmap? Scale Cyvance into a trusted security partner, grow Fusion Interpreter to serve 100+ clients, and share what I learn 
+                on YouTube to help the next generation of builders get started faster than I did.
               </p>
             </motion.div>
 

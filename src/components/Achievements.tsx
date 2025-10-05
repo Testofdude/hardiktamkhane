@@ -5,51 +5,51 @@ import { Award, BookOpen, Trophy, Sparkles, TrendingUp, Coins, Shield, LineChart
 const achievements = [
   {
     icon: Sparkles,
-    title: "Started IT Experience",
-    description: "Started IT experience by coding",
-    year: "Class 5th",
-  },
-  {
-    icon: Coins,
-    title: "Crypto Enthusiast",
-    description: "Started exploring cryptocurrency and blockchain technology",
-    year: "Class 6th",
+    title: "Started Coding",
+    description: "First lines of code—building the foundation for everything to come",
+    year: "Age 10",
   },
   {
     icon: TrendingUp,
-    title: "Finance Enthusiast",
-    description: "Developed passion for finance, investing, and trading",
-    year: "Class 6th",
+    title: "Dove Into Finance & Crypto",
+    description: "Studied investing, trading, and blockchain—learning how markets really work",
+    year: "Age 11",
   },
   {
     icon: Trophy,
     title: "Founded Fusion Interpreter",
-    description: "Performance marketing agency specializing in Meta & LinkedIn ads",
-    year: "Class 7th",
+    description: "Launched performance marketing agency—now serving multiple clients with data-driven campaigns",
+    year: "Age 13",
   },
   {
     icon: LineChart,
-    title: "Certified Digital Performance Marketer",
-    description: "Achieved certification in digital performance marketing",
-    year: "Class 7th",
+    title: "Certified Performance Marketer",
+    description: "Earned digital marketing certification to formalize what I was already doing",
+    year: "Age 13",
   },
   {
     icon: BookOpen,
-    title: "Published Author",
-    description: "Published finance book covering investing and trading",
-    year: "Class 8th",
+    title: "Published Finance Book",
+    description: "Authored and published a book on investing, trading, and financial literacy",
+    year: "Age 14",
   },
   {
     icon: Shield,
-    title: "Certified Cybersecurity Expert",
-    description: "Earned certification in cybersecurity expertise",
-    year: "Class 8th",
+    title: "Certified in Cybersecurity",
+    description: "Became a certified cybersecurity expert—penetration testing and cloud security",
+    year: "Age 14",
   },
   {
     icon: Award,
     title: "Founded Cyvance Security",
-    description: "Launched cybersecurity solutions company",
-    year: "Class 8th",
+    description: "Launched cybersecurity firm focused on real-world risk assessment and penetration testing",
+    year: "Age 14",
+  },
+  {
+    icon: Coins,
+    title: "35+ Projects Shipped",
+    description: "From MVPs to production apps—each one a lesson in building, shipping, and iterating",
+    year: "Ongoing",
   },
 ];
 
@@ -73,7 +73,7 @@ export const Achievements = () => {
             Achievements & <span className="gradient-text bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Milestones</span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Key moments that shaped my journey
+            Milestones built on action, not age—proof that execution matters more than experience
           </p>
         </motion.div>
 

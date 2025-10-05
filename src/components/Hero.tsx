@@ -184,7 +184,7 @@ export const Hero = () => {
               variants={itemVariants}
               className="text-xl md:text-2xl lg:text-3xl text-muted-foreground font-medium"
             >
-              Founder • Web Developer • Digital Marketer • Aspiring Cybersecurity Expert
+              Founder & Builder at the Intersection of Code, Security & Growth
             </motion.p>
 
             {/* Description */}
@@ -192,7 +192,7 @@ export const Hero = () => {
               variants={itemVariants}
               className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl"
             >
-              ⚡Serial Entrepreneur (Cyvance, Fusion Interpreter) | 🛡️Cybersecurity Expert | 💻Frontend Developer + 📈Performance Marketing Expert | 📚Published Author | 💹Crypto Trader
+              Building two startups—Cyvance Security and Fusion Interpreter—while scaling cybersecurity solutions and performance marketing campaigns. Published author. 35+ projects shipped. Turning ideas into impact.
             </motion.p>
 
             {/* Call-to-action buttons */}

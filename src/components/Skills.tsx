@@ -7,39 +7,39 @@ const skillCategories = [
     title: "Frontend Development",
     icon: Code2,
     skills: [
-      { name: "React & Next.js", proof: "Built full-stack applications with modern frameworks" },
-      { name: "TypeScript", proof: "Type-safe development for robust applications" },
-      { name: "Tailwind CSS", proof: "Created responsive, beautiful UI systems" },
-      { name: "Framer Motion", proof: "Smooth animations and micro-interactions" },
+      { name: "React & Next.js", proof: "35+ production apps shipped to real users" },
+      { name: "TypeScript", proof: "Type-safe architectures across all projects" },
+      { name: "Tailwind CSS", proof: "Custom design systems for client brands" },
+      { name: "Framer Motion", proof: "High-performance animations for premium UX" },
     ],
   },
   {
     title: "Digital Marketing",
     icon: LineChart,
     skills: [
-      { name: "Meta Advertising", proof: "Specialized in Facebook & Instagram campaigns" },
-      { name: "LinkedIn Ads", proof: "B2B marketing and lead generation expert" },
-      { name: "Brand Consulting", proof: "Strategic guidance for brand positioning" },
-      { name: "Campaign Analytics", proof: "Data-driven optimization and reporting" },
+      { name: "Meta Advertising", proof: "Managing multi-client campaigns at Fusion Interpreter" },
+      { name: "LinkedIn Ads", proof: "B2B lead generation and conversion optimization" },
+      { name: "Brand Strategy", proof: "Positioning brands for measurable growth" },
+      { name: "Analytics & Reporting", proof: "Data-driven decisions backed by metrics" },
     ],
   },
   {
     title: "Cybersecurity",
     icon: Shield,
     skills: [
-      { name: "Risk Assessment", proof: "Identifying and mitigating security vulnerabilities" },
-      { name: "Penetration Testing", proof: "Ethical hacking and security testing" },
-      { name: "Cloud Security", proof: "Securing cloud infrastructure and applications" },
+      { name: "Risk Assessment", proof: "Securing client infrastructure at Cyvance" },
+      { name: "Penetration Testing", proof: "Identifying vulnerabilities before attackers do" },
+      { name: "Cloud Security", proof: "AWS & cloud-native security implementation" },
     ],
   },
   {
     title: "Tools & Platforms",
     icon: Wrench,
     skills: [
-      { name: "Git & GitHub", proof: "Version control and collaborative development" },
-      { name: "Figma", proof: "UI/UX design and prototyping" },
-      { name: "VS Code", proof: "Primary development environment" },
-      { name: "Make.com", proof: "Automation and workflow optimization" },
+      { name: "Git & GitHub", proof: "Managing codebases across multiple projects" },
+      { name: "Figma", proof: "Designing before building—every time" },
+      { name: "Linux & VS Code", proof: "Development environment optimized for speed" },
+      { name: "Make.com", proof: "Automating workflows to scale operations" },
     ],
   },
 ];
@@ -64,7 +64,7 @@ export const Skills = () => {
             Skills & <span className="gradient-text bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Expertise</span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            A comprehensive toolkit spanning development, design, marketing, and security
+            Technical depth across development, marketing, and security—built through real projects, not just tutorials
           </p>
         </motion.div>
 

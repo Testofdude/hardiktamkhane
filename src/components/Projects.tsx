@@ -101,7 +101,7 @@ export const Projects = () => {
             Featured <span className="gradient-text bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Projects</span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Real-world solutions delivering measurable impact
+            Real projects. Real clients. Real results—not just case studies
           </p>
         </motion.div>
 
