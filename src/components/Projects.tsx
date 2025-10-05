@@ -1,10 +1,9 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
 
 const projects = [
   {
@@ -189,20 +188,6 @@ export const Projects = () => {
                         <Badge key={tag}>{tag}</Badge>
                       ))}
                     </div>
-                  </div>
-                  <div className="flex gap-4">
-                    <Button asChild>
-                      <a href={selectedProject.link} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        View Live
-                      </a>
-                    </Button>
-                    <Button variant="outline" asChild>
-                      <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
-                        <Github className="w-4 h-4 mr-2" />
-                        View Code
-                      </a>
-                    </Button>
                   </div>
                 </div>
               </>
