@@ -1,304 +1,230 @@
-import { motion, useReducedMotion, Variants } from "framer-motion";
-import { ArrowDown } from "lucide-react";
-import { Button } from "./ui/button";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDown, Zap, Shield, Code } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { CircuitLines } from "./effects/CircuitLines";
+import { GlowOrb } from "./effects/GlowOrb";
+import { ParallaxLayer } from "./effects/ParallaxLayer";
+import { HolographicOverlay } from "./effects/HolographicOverlay";
+import { StatusIndicator } from "./effects/StatusIndicator";
+import { TechButton } from "./ui/TechButton";
 
-// Floating shape component for background animation
-const FloatingShape = ({ delay = 0, duration = 20, size = 300, blur = 60, className = "" }: {
-  delay?: number;
-  duration?: number;
-  size?: number;
-  blur?: number;
-  className?: string;
-}) => {
+// Animated data streams
+const DataStream = ({ delay = 0 }: { delay?: number }) => {
   const shouldReduceMotion = useReducedMotion();
-
+  
   return (
     <motion.div
-      className={`absolute rounded-full ${className}`}
-      style={{
-        width: size,
-        height: size,
-        filter: `blur(${blur}px)`,
-      }}
-      initial={{ opacity: 0 }}
-      animate={shouldReduceMotion ? { opacity: 0.4 } : {
-        opacity: [0.3, 0.5, 0.3],
-        x: [0, 100, 0],
-        y: [0, -100, 0],
-        scale: [1, 1.1, 1],
+      className="absolute h-px w-32 bg-gradient-to-r from-transparent via-accent/50 to-transparent"
+      style={{ top: `${20 + Math.random() * 60}%` }}
+      initial={{ x: "-100%", opacity: 0 }}
+      animate={shouldReduceMotion ? { opacity: 0.3 } : { 
+        x: ["calc(-100%)", "calc(100vw + 100%)"],
+        opacity: [0, 0.6, 0.6, 0],
       }}
       transition={{
-        duration,
+        duration: 4 + Math.random() * 2,
         delay,
         repeat: Infinity,
-        ease: "easeInOut",
+        repeatDelay: 3 + Math.random() * 2,
+        ease: "linear",
       }}
     />
   );
 };
 
-// Lightweight particle dots
-const ParticleDots = () => {
+// Tech stat display
+const TechStat = ({ value, label, icon: Icon }: { value: string; label: string; icon: any }) => {
   const shouldReduceMotion = useReducedMotion();
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    if (shouldReduceMotion) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [shouldReduceMotion]);
-
-  if (shouldReduceMotion) return null;
-
-  const dots = Array.from({ length: 30 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-  }));
-
+  
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {dots.map((dot) => {
-        const distanceX = (mousePosition.x / window.innerWidth) * 100 - dot.x;
-        const distanceY = (mousePosition.y / window.innerHeight) * 100 - dot.y;
-        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-        const offset = Math.max(0, 20 - distance);
-
-        return (
-          <motion.div
-            key={dot.id}
-            className="absolute w-1 h-1 rounded-full bg-primary/20"
-            style={{
-              left: `${dot.x}%`,
-              top: `${dot.y}%`,
-            }}
-            animate={{
-              x: distanceX * offset * 0.5,
-              y: distanceY * offset * 0.5,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 150,
-              damping: 20,
-            }}
-          />
-        );
-      })}
-    </div>
+    <motion.div
+      className="glass-card p-4 rounded-xl flex items-center gap-3"
+      whileHover={shouldReduceMotion ? {} : { scale: 1.05, y: -2 }}
+    >
+      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+        <Icon className="w-5 h-5 text-accent" />
+      </div>
+      <div>
+        <div className="text-lg font-display font-bold gradient-text">{value}</div>
+        <div className="text-xs text-muted-foreground">{label}</div>
+      </div>
+    </motion.div>
   );
 };
 
 export const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
+  const [glitchText, setGlitchText] = useState(false);
 
-  // Animation variants for staggered animations
-  const containerVariants: Variants = {
+  // Subtle glitch effect on name
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+    
+    const interval = setInterval(() => {
+      setGlitchText(true);
+      setTimeout(() => setGlitchText(false), 100);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [shouldReduceMotion]);
+
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.1, delayChildren: 0.3 },
     },
   };
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-      },
-    },
-  };
-
-  const buttonVariants: Variants = {
-    hidden: { opacity: 0, scale: shouldReduceMotion ? 1 : 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-      },
-    },
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
       role="banner"
     >
-      {/* Animated mesh gradient background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 mesh-gradient opacity-40" />
+      {/* Background layers */}
+      <div className="absolute inset-0 -z-20">
+        <div className="absolute inset-0 mesh-gradient opacity-50" />
+        <div className="absolute inset-0 circuit-bg opacity-30" />
       </div>
 
-      {/* Floating shapes with glow effects - more subtle */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-          <FloatingShape
-            delay={0}
-            duration={30}
-            size={500}
-            blur={140}
-            className="bg-gradient-to-br from-primary/12 to-primary/5 -top-32 -left-32"
-          />
-          <FloatingShape
-            delay={10}
-            duration={35}
-            size={450}
-            blur={120}
-            className="bg-gradient-to-br from-accent/12 to-accent/5 top-1/4 -right-32"
-          />
-      </div>
+      {/* Animated glow orbs */}
+      <ParallaxLayer speed={0.3} className="absolute inset-0 -z-10">
+        <GlowOrb size={600} color="primary" className="-top-40 -left-40" delay={0} />
+        <GlowOrb size={500} color="accent" className="top-1/4 -right-40" delay={2} />
+        <GlowOrb size={400} color="primary" className="bottom-0 left-1/3" delay={4} />
+      </ParallaxLayer>
 
-      <div className="container mx-auto px-6 py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
-          {/* Left Column - Text Content */}
-          <motion.div
-            className="space-y-6 lg:space-y-8"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+      {/* Circuit lines overlay */}
+      <CircuitLines variant="hero" />
+
+      {/* Data streams */}
+      {!shouldReduceMotion && (
+        <>
+          <DataStream delay={0} />
+          <DataStream delay={1.5} />
+          <DataStream delay={3} />
+        </>
+      )}
+
+      {/* Holographic overlay */}
+      <HolographicOverlay intensity="subtle" />
+
+      <div className="container mx-auto px-6 py-24 relative z-10">
+        <motion.div
+          className="max-w-5xl mx-auto"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Status bar */}
+          <motion.div 
+            variants={itemVariants}
+            className="flex items-center gap-4 mb-8"
           >
-            {/* Main heading with gradient */}
-            <motion.h1
-              variants={itemVariants}
-              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-bold leading-tight"
-            >
-              <span className="gradient-text bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                Hardik Tamkhane
-              </span>
-            </motion.h1>
-
-            {/* Subheading */}
-            <motion.p
-              variants={itemVariants}
-              className="text-xl md:text-2xl lg:text-3xl text-muted-foreground font-medium"
-            >
-              Founder & Builder at the Intersection of Code, Security & Growth
-            </motion.p>
-
-            {/* Description */}
-            <motion.p
-              variants={itemVariants}
-              className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl"
-            >
-              Building two startups—Cyvance Security and Fusion Interpreter—while scaling cybersecurity solutions and performance marketing campaigns. Published author. 35+ projects shipped. Turning ideas into impact.
-            </motion.p>
-
-            {/* Call-to-action buttons */}
-            <motion.div
-              variants={containerVariants}
-              className="flex flex-col sm:flex-row gap-4 pt-4"
-            >
-              <motion.div 
-                variants={buttonVariants}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  size="lg"
-                  variant="gradient"
-                  onClick={() =>
-                    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
-                  }
-                  className="w-full sm:w-auto px-8 py-6 rounded-full text-base font-semibold shadow-lg hover:shadow-2xl hover:shadow-primary/50 transition-all duration-300"
-                  aria-label="View my work and projects"
-                >
-                  View Work
-                </Button>
-              </motion.div>
-              <motion.div 
-                variants={buttonVariants}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  size="lg"
-                  variant="outline"
-                  asChild
-                  className="w-full sm:w-auto px-8 py-6 rounded-full text-base font-semibold hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
-                >
-                  <a href="#contact" aria-label="Get in touch with me">
-                    Contact Me
-                  </a>
-                </Button>
-              </motion.div>
-            </motion.div>
+            <StatusIndicator status="online" />
+            <span className="text-xs font-mono text-muted-foreground tracking-wider">
+              SYSTEM ACTIVE • FOUNDER MODE ENABLED
+            </span>
           </motion.div>
 
-          {/* Right Column - Profile Image */}
-          <motion.div
-            initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 50, scale: shouldReduceMotion ? 1 : 0.9 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex justify-center lg:justify-end"
+          {/* Main heading */}
+          <motion.h1
+            variants={itemVariants}
+            className={`text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] mb-6 ${
+              glitchText ? "animate-pulse" : ""
+            }`}
           >
-            <div className="relative">
-              {/* Glow effect behind image */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 rounded-full blur-3xl animate-pulse" />
-              
-              {/* Profile Image */}
-              <div className="relative w-72 h-72 md:w-96 md:h-96 lg:w-[450px] lg:h-[450px] rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl shadow-primary/20">
-                <motion.img
-                  src="/placeholder.svg"
-                  alt="Hardik Tamkhane - Founder, Web Developer, Digital Marketer, and Aspiring Cybersecurity Expert"
-                  className="w-full h-full object-cover"
-                  animate={shouldReduceMotion ? {} : {
-                    scale: [1, 1.05, 1],
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-              </div>
+            <span className="block text-foreground/90">Building the</span>
+            <span className="block gradient-text neon-text">
+              Future of Tech
+            </span>
+          </motion.h1>
 
-              {/* Decorative ring */}
-              <motion.div
-                className="absolute -inset-4 rounded-full border-2 border-accent/30"
-                animate={shouldReduceMotion ? {} : {
-                  rotate: 360,
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-            </div>
+          {/* Subheading */}
+          <motion.p
+            variants={itemVariants}
+            className="text-xl md:text-2xl text-muted-foreground font-medium mb-4 max-w-2xl"
+          >
+            Founder & Builder at the Intersection of 
+            <span className="text-accent"> Code</span>, 
+            <span className="text-primary"> Security</span> & 
+            <span className="text-foreground"> Growth</span>
+          </motion.p>
+
+          {/* Description */}
+          <motion.p
+            variants={itemVariants}
+            className="text-base md:text-lg text-muted-foreground/80 leading-relaxed max-w-xl mb-8"
+          >
+            Building two startups—Cyvance Security and Fusion Interpreter—while scaling 
+            cybersecurity solutions and performance marketing campaigns. Published author. 
+            35+ projects shipped. Turning ideas into impact.
+          </motion.p>
+
+          {/* Stats row */}
+          <motion.div
+            variants={itemVariants}
+            className="grid grid-cols-3 gap-4 mb-10 max-w-lg"
+          >
+            <TechStat value="35+" label="Projects" icon={Code} />
+            <TechStat value="2" label="Startups" icon={Zap} />
+            <TechStat value="1" label="Book" icon={Shield} />
           </motion.div>
-        </div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row gap-4"
+          >
+            <TechButton
+              variant="primary"
+              size="lg"
+              onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+            >
+              <span>Explore Work</span>
+              <motion.span
+                animate={shouldReduceMotion ? {} : { x: [0, 4, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                →
+              </motion.span>
+            </TechButton>
+            
+            <TechButton variant="outline" size="lg">
+              <Link to="/contact" className="flex items-center gap-2">
+                Initialize Contact
+              </Link>
+            </TechButton>
+          </motion.div>
+        </motion.div>
 
         {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1 }}
+          transition={{ duration: 0.6, delay: 1.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <motion.button
-            onClick={() =>
-              document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })
-            }
-            animate={shouldReduceMotion ? {} : { y: [0, 12, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="inline-flex flex-col items-center gap-2 cursor-pointer text-muted-foreground hover:text-foreground transition-all duration-300 group"
-            aria-label="Scroll down to explore more"
+            onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+            animate={shouldReduceMotion ? {} : { y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group"
           >
-            <span className="text-sm font-medium tracking-wide">Scroll to explore</span>
-            <div className="p-2 rounded-full border-2 border-current group-hover:border-primary transition-all duration-300">
-              <ArrowDown className="w-4 h-4" />
+            <span className="text-xs font-mono tracking-wider">SCROLL</span>
+            <div className="w-6 h-10 rounded-full border border-border/50 flex items-start justify-center p-2 group-hover:border-accent/50 transition-colors">
+              <motion.div
+                className="w-1 h-2 rounded-full bg-accent"
+                animate={shouldReduceMotion ? {} : { y: [0, 12, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
             </div>
           </motion.button>
         </motion.div>
