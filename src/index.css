@@ -2,71 +2,92 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Futuristic Cyber Design System - HSL Colors */
 
 @layer base {
   :root {
-    /* Premium Modern Theme - HSL Colors */
-    --background: 240 10% 3.9%;
+    /* Core Dark Theme - Deep Space */
+    --background: 240 15% 4%;
     --foreground: 0 0% 98%;
 
-    --card: 240 10% 5%;
+    --card: 240 12% 6%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 240 10% 5%;
+    --popover: 240 12% 6%;
     --popover-foreground: 0 0% 98%;
 
-    /* Vibrant Purple-Blue Primary */
+    /* Cyber Purple Primary */
     --primary: 263 70% 65%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 263 70% 75%;
+    --primary-glow: 263 80% 75%;
+    --primary-dim: 263 50% 45%;
 
     /* Soft Secondary */
-    --secondary: 240 5% 12%;
+    --secondary: 240 8% 10%;
     --secondary-foreground: 0 0% 98%;
 
-    /* Cyan Accent */
+    /* Cyan Accent - Neon Tech */
     --accent: 189 94% 43%;
     --accent-foreground: 0 0% 100%;
-    --accent-glow: 189 94% 53%;
+    --accent-glow: 189 100% 55%;
+    --accent-dim: 189 70% 35%;
 
-    --muted: 240 5% 12%;
-    --muted-foreground: 240 5% 64%;
+    --muted: 240 8% 12%;
+    --muted-foreground: 240 5% 55%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 6% 15%;
-    --input: 240 6% 15%;
+    --border: 240 8% 12%;
+    --input: 240 8% 12%;
     --ring: 263 70% 65%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    /* Premium Design Tokens */
+    /* Cyber Design Tokens */
     --gradient-primary: linear-gradient(135deg, hsl(263 70% 65%), hsl(189 94% 43%));
     --gradient-accent: linear-gradient(135deg, hsl(189 94% 43%), hsl(263 70% 65%));
-    --gradient-hero: linear-gradient(135deg, hsl(263 70% 65% / 0.9), hsl(189 94% 43% / 0.9));
-    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(263 70% 65% / 0.25), transparent 70%);
+    --gradient-hero: linear-gradient(135deg, hsl(263 70% 65% / 0.8), hsl(189 94% 43% / 0.8));
+    --gradient-holographic: linear-gradient(125deg, 
+      hsl(263 70% 65% / 0.3) 0%, 
+      hsl(189 94% 43% / 0.2) 25%, 
+      hsl(263 70% 65% / 0.1) 50%, 
+      hsl(189 94% 43% / 0.3) 75%, 
+      hsl(263 70% 65% / 0.2) 100%
+    );
+    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(263 70% 65% / 0.2), transparent 60%);
     --gradient-mesh: 
-      radial-gradient(at 30% 20%, hsl(263 70% 65% / 0.15) 0px, transparent 50%),
-      radial-gradient(at 80% 10%, hsl(189 94% 43% / 0.12) 0px, transparent 50%),
-      radial-gradient(at 10% 60%, hsl(263 70% 65% / 0.10) 0px, transparent 50%),
-      radial-gradient(at 90% 90%, hsl(189 94% 43% / 0.08) 0px, transparent 50%);
+      radial-gradient(at 30% 20%, hsl(263 70% 65% / 0.12) 0px, transparent 50%),
+      radial-gradient(at 80% 10%, hsl(189 94% 43% / 0.10) 0px, transparent 50%),
+      radial-gradient(at 10% 60%, hsl(263 70% 65% / 0.08) 0px, transparent 50%),
+      radial-gradient(at 90% 90%, hsl(189 94% 43% / 0.06) 0px, transparent 50%);
+    --gradient-circuit: linear-gradient(90deg, 
+      transparent 0%, 
+      hsl(189 94% 43% / 0.5) 50%, 
+      transparent 100%
+    );
     
-    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.3);
+    /* Nano Shadows */
+    --shadow-nano: 0 1px 2px 0 hsl(0 0% 0% / 0.4);
+    --shadow-sm: 0 2px 4px -1px hsl(0 0% 0% / 0.3);
     --shadow-md: 0 4px 12px -2px hsl(0 0% 0% / 0.4);
-    --shadow-lg: 0 10px 30px -5px hsl(0 0% 0% / 0.5);
-    --shadow-xl: 0 20px 40px -10px hsl(0 0% 0% / 0.6);
-    --shadow-glow: 0 0 60px hsl(263 70% 65% / 0.4), 0 0 100px hsl(263 70% 65% / 0.2);
-    --shadow-glow-accent: 0 0 60px hsl(189 94% 43% / 0.4), 0 0 100px hsl(189 94% 43% / 0.2);
-    --shadow-inner: inset 0 2px 8px 0 hsl(0 0% 0% / 0.2);
+    --shadow-lg: 0 12px 24px -4px hsl(0 0% 0% / 0.5);
+    --shadow-xl: 0 24px 48px -12px hsl(0 0% 0% / 0.6);
+    --shadow-glow: 0 0 40px hsl(263 70% 65% / 0.3), 0 0 80px hsl(263 70% 65% / 0.15);
+    --shadow-glow-accent: 0 0 40px hsl(189 94% 43% / 0.3), 0 0 80px hsl(189 94% 43% / 0.15);
+    --shadow-glow-intense: 0 0 60px hsl(263 70% 65% / 0.5), 0 0 120px hsl(189 94% 43% / 0.3);
+    --shadow-inner-glow: inset 0 0 20px hsl(263 70% 65% / 0.1);
     
     /* Glass morphism */
-    --glass-bg: hsl(240 10% 5% / 0.6);
-    --glass-border: hsl(0 0% 100% / 0.08);
-    --glass-strong: hsl(240 10% 5% / 0.8);
+    --glass-bg: hsl(240 15% 6% / 0.7);
+    --glass-border: hsl(0 0% 100% / 0.06);
+    --glass-strong: hsl(240 15% 6% / 0.85);
+    --glass-subtle: hsl(240 15% 8% / 0.5);
+
+    /* Circuit Colors */
+    --circuit-line: hsl(189 94% 43% / 0.3);
+    --circuit-node: hsl(263 70% 65%);
+    --circuit-pulse: hsl(189 94% 43%);
   }
 }
 
@@ -77,20 +98,46 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, hsl(263 70% 65% / 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 100%, hsl(189 94% 43% / 0.05), transparent);
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight;
   }
 
-  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
   }
 
-  /* Focus visible for accessibility */
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-primary;
+  }
+
+  /* Custom scrollbar - Cyber style */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(240 15% 6%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, hsl(263 70% 65% / 0.5), hsl(189 94% 43% / 0.5));
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, hsl(263 70% 65% / 0.7), hsl(189 94% 43% / 0.7));
+  }
+
+  /* Selection styling */
+  ::selection {
+    background: hsl(263 70% 65% / 0.3);
+    color: hsl(0 0% 100%);
   }
 }
 
@@ -99,19 +146,36 @@ All colors MUST be HSL.
     text-wrap: balance;
   }
 
-  /* Glass morphism effect */
+  /* Advanced Glassmorphism */
   .glass {
     background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
     border: 1px solid var(--glass-border);
   }
 
   .glass-strong {
     background: var(--glass-strong);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border: 1px solid hsl(0 0% 100% / 0.12);
+    backdrop-filter: blur(30px) saturate(1.3);
+    -webkit-backdrop-filter: blur(30px) saturate(1.3);
+    border: 1px solid hsl(0 0% 100% / 0.08);
+  }
+
+  .glass-subtle {
+    background: var(--glass-subtle);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(0 0% 100% / 0.04);
+  }
+
+  .glass-card {
+    background: linear-gradient(135deg, hsl(240 12% 8% / 0.9), hsl(240 12% 6% / 0.95));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid hsl(0 0% 100% / 0.05);
+    box-shadow: 
+      0 4px 24px -4px hsl(0 0% 0% / 0.4),
+      inset 0 1px 0 hsl(0 0% 100% / 0.05);
   }
 
   /* Gradient text effect */
@@ -120,6 +184,33 @@ All colors MUST be HSL.
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-text-accent {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Holographic effect */
+  .holographic {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .holographic::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-holographic);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .holographic:hover::before {
+    opacity: 1;
   }
 
   /* Animated gradient border */
@@ -134,16 +225,124 @@ All colors MUST be HSL.
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    padding: 2px;
+    padding: 1px;
     background: var(--gradient-primary);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
   }
 
+  .gradient-border-animated::before {
+    background: linear-gradient(var(--gradient-angle, 0deg), hsl(263 70% 65%), hsl(189 94% 43%), hsl(263 70% 65%));
+    animation: gradient-rotate 4s linear infinite;
+  }
+
+  @keyframes gradient-rotate {
+    to {
+      --gradient-angle: 360deg;
+    }
+  }
+
+  @property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
   /* Mesh gradient background */
   .mesh-gradient {
     background: var(--gradient-mesh);
+  }
+
+  /* Circuit line pattern */
+  .circuit-bg {
+    background-image: 
+      linear-gradient(90deg, hsl(189 94% 43% / 0.03) 1px, transparent 1px),
+      linear-gradient(180deg, hsl(189 94% 43% / 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .circuit-overlay {
+    position: relative;
+  }
+
+  .circuit-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(90deg, hsl(189 94% 43% / 0.02) 1px, transparent 1px),
+      linear-gradient(180deg, hsl(189 94% 43% / 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  }
+
+  /* Cyber card styles */
+  .cyber-card {
+    background: linear-gradient(135deg, hsl(240 12% 8% / 0.95), hsl(240 12% 5% / 0.98));
+    border: 1px solid hsl(0 0% 100% / 0.04);
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cyber-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(189 94% 43% / 0.5), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .cyber-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      hsl(263 70% 65% / 0.06),
+      transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .cyber-card:hover {
+    border-color: hsl(0 0% 100% / 0.08);
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 32px -8px hsl(0 0% 0% / 0.5),
+      0 0 40px hsl(263 70% 65% / 0.08);
+  }
+
+  .cyber-card:hover::before {
+    opacity: 1;
+  }
+
+  .cyber-card:hover::after {
+    opacity: 1;
+  }
+
+  /* Status indicator */
+  .status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: hsl(142 76% 36%);
+    box-shadow: 0 0 8px hsl(142 76% 36% / 0.6);
+    animation: status-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.9); }
   }
 
   /* Advanced animations */
@@ -183,10 +382,10 @@ All colors MUST be HSL.
 
   @keyframes glow {
     0%, 100% {
-      box-shadow: 0 0 30px hsl(263 70% 65% / 0.3);
+      box-shadow: 0 0 20px hsl(263 70% 65% / 0.2);
     }
     50% {
-      box-shadow: 0 0 60px hsl(263 70% 65% / 0.5), 0 0 80px hsl(189 94% 43% / 0.3);
+      box-shadow: 0 0 40px hsl(263 70% 65% / 0.4), 0 0 60px hsl(189 94% 43% / 0.2);
     }
   }
 
@@ -194,7 +393,7 @@ All colors MUST be HSL.
     background: linear-gradient(
       90deg,
       transparent,
-      hsl(0 0% 100% / 0.1),
+      hsl(0 0% 100% / 0.08),
       transparent
     );
     background-size: 200% 100%;
@@ -216,8 +415,115 @@ All colors MUST be HSL.
       transform: translateY(0px);
     }
     50% {
-      transform: translateY(-20px);
+      transform: translateY(-15px);
     }
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(263 70% 65% / 0.15);
+      border-color: hsl(0 0% 100% / 0.05);
+    }
+    50% {
+      box-shadow: 0 0 30px hsl(263 70% 65% / 0.25), 0 0 50px hsl(189 94% 43% / 0.1);
+      border-color: hsl(0 0% 100% / 0.1);
+    }
+  }
+
+  .animate-circuit-flow {
+    animation: circuitFlow 3s linear infinite;
+  }
+
+  @keyframes circuitFlow {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 100%;
+    }
+  }
+
+  .animate-scan-line {
+    animation: scanLine 8s linear infinite;
+  }
+
+  @keyframes scanLine {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    5% {
+      opacity: 1;
+    }
+    95% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+
+  .animate-data-stream {
+    animation: dataStream 15s linear infinite;
+  }
+
+  @keyframes dataStream {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Neon text effect */
+  .neon-text {
+    text-shadow: 
+      0 0 5px hsl(263 70% 65% / 0.5),
+      0 0 10px hsl(263 70% 65% / 0.3),
+      0 0 20px hsl(263 70% 65% / 0.2);
+  }
+
+  .neon-text-accent {
+    text-shadow: 
+      0 0 5px hsl(189 94% 43% / 0.5),
+      0 0 10px hsl(189 94% 43% / 0.3),
+      0 0 20px hsl(189 94% 43% / 0.2);
+  }
+
+  /* Magnetic hover effect support */
+  .magnetic-hover {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Tech button hover */
+  .tech-button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .tech-button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, hsl(0 0% 100% / 0.1), transparent);
+    transition: width 0.5s ease, height 0.5s ease;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+
+  .tech-button:hover::before {
+    width: 300%;
+    height: 300%;
   }
 
   /* Reduced motion support */
