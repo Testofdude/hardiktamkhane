@@ -5,28 +5,46 @@ import { Button } from "./ui/button";
 
 const timeline = [
   {
-    year: "Class 5",
-    title: "Became a Coder",
-    description: "Started my programming journey, learning the fundamentals of coding and developing a passion for building digital solutions",
+    year: "Age 11",
+    title: "Code Initiated",
+    description: "Started my programming journey by learning core coding fundamentals and building early digital projects. This is where problem-solving became instinct, not optional.",
     icon: Sparkles,
   },
   {
-    year: "Class 6",
-    title: "Finance & Crypto Enthusiast",
-    description: "Began learning finance, cryptocurrency trading, and price action analysis to understand market dynamics",
+    year: "Age 12",
+    title: "Finance & Crypto Deep Dive",
+    description: "Entered the world of finance, cryptocurrency markets, and price action. Studied market psychology, risk, and structure to understand how money actually moves.",
     icon: TrendingUp,
   },
   {
-    year: "Class 7",
+    year: "Age 13",
     title: "Marketing & Entrepreneurship",
-    description: "Started learning marketing strategies and founded Fusion Interpreter, a performance marketing agency",
+    description: "Learned modern marketing systems and founded Fusion Interpreter, a performance marketing agency focused on real outcomes, not vanity metrics.",
     icon: Rocket,
   },
   {
-    year: "Class 8",
-    title: "Cybersecurity Journey",
-    description: "Embarked on cybersecurity path, focusing on risk assessment, penetration testing, and cloud security",
+    year: "Age 14",
+    title: "Cybersecurity Path Activated",
+    description: "Began formal cybersecurity training with focus on risk assessment, penetration testing, and cloud security—learning how systems fail, not just how they run.",
     icon: BookOpen,
+  },
+  {
+    year: "Age 14",
+    title: "Cyvance Security Founded",
+    description: "Launched Cyvance Security, a cybersecurity firm focused on proactive defense, threat analysis, and digital resilience.",
+    icon: Rocket,
+  },
+  {
+    year: "Age 14",
+    title: "ArcNet Newsletter Launched",
+    description: "Started ArcNet, a newsletter breaking down technology, cybersecurity, and the future of digital systems in a clear, signal-over-noise format.",
+    icon: BookOpen,
+  },
+  {
+    year: "Age 14",
+    title: "SynthaXia AI Released",
+    description: "Launched SynthaXia AI, an AI-powered tool designed to simplify workflows and push intelligent automation forward.",
+    icon: Sparkles,
   },
 ];
 
