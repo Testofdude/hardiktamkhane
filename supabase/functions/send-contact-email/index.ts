@@ -60,7 +60,7 @@ const handler = async (req: Request): Promise<Response> => {
       },
       body: JSON.stringify({
         from: "Contact Form <onboarding@resend.dev>",
-        to: ["hardiktamkhane@gmail.com"],
+        to: ["hardiktamkhane632@gmail.com"],
         subject: `[Contact Form] ${subject} - from ${name}`,
         html: `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); color: #fff; border-radius: 16px;">
