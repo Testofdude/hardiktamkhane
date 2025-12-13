@@ -1026,7 +1026,12 @@ const BookPage = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
             >
-              <MagneticButton variant="primary" size="lg" className="text-xl px-12 py-6">
+              <MagneticButton 
+                variant="primary" 
+                size="lg" 
+                className="text-xl px-12 py-6"
+                onClick={() => window.open('https://amzn.in/d/hOZ63oS', '_blank')}
+              >
                 <BookOpen className="w-6 h-6" />
                 Get The Book Now
                 <ArrowRight className="w-6 h-6" />

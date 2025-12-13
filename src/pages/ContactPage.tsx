@@ -12,13 +12,14 @@ import { CyberCard } from "@/components/ui/CyberCard";
 import { TechButton } from "@/components/ui/TechButton";
 import { StatusIndicator } from "@/components/effects/StatusIndicator";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@hardiktamkhane.com",
-    href: "mailto:hello@hardiktamkhane.com",
+    value: "hardiktamkhane@gmail.com",
+    href: "mailto:hardiktamkhane@gmail.com",
   },
   {
     icon: MapPin,
@@ -50,18 +51,37 @@ const ContactPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    toast.success("Message transmitted successfully!");
-    
-    // Reset after delay
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormState({ name: "", email: "", subject: "", message: "" });
-    }, 3000);
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formState.name.trim(),
+          email: formState.email.trim(),
+          subject: formState.subject,
+          message: formState.message.trim(),
+        },
+      });
+
+      if (error) {
+        console.error('Error sending email:', error);
+        toast.error("Failed to send message. Please try again.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      toast.success("Message transmitted successfully!");
+      
+      // Reset after delay
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormState({ name: "", email: "", subject: "", message: "" });
+      }, 3000);
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error("Failed to send message. Please try again.");
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
