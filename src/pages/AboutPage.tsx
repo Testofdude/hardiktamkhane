@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Calendar, MapPin, Rocket, BookOpen, Code, Shield, Award } from "lucide-react";
+import { Calendar, MapPin, Rocket, BookOpen, Code, Shield, TrendingUp, Newspaper, Sparkles } from "lucide-react";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -11,38 +11,52 @@ import { CyberCard } from "@/components/ui/CyberCard";
 
 const timeline = [
   {
-    year: "Age 10",
-    title: "Started Coding",
-    description: "Wrote my first line of code. The spark that started everything.",
+    year: "Age 11",
+    title: "Code Initiated",
+    description: "Started my programming journey by learning core coding fundamentals and building early digital projects. This is where problem-solving became instinct, not optional.",
     icon: Code,
     color: "accent",
   },
   {
-    year: "Age 16",
-    title: "Published First Book",
-    description: "Authored and published a book while still in school. Words became another form of code.",
-    icon: BookOpen,
+    year: "Age 12",
+    title: "Finance & Crypto Deep Dive",
+    description: "Entered the world of finance, cryptocurrency markets, and price action. Studied market psychology, risk, and structure to understand how money actually moves.",
+    icon: TrendingUp,
     color: "primary",
   },
   {
-    year: "2023",
-    title: "Founded Fusion Interpreter",
-    description: "Launched my first startup—bridging language gaps with technology.",
+    year: "Age 13",
+    title: "Marketing & Entrepreneurship",
+    description: "Learned modern marketing systems and founded Fusion Interpreter, a performance marketing agency focused on real outcomes, not vanity metrics.",
     icon: Rocket,
     color: "accent",
   },
   {
-    year: "2024",
-    title: "Founded Cyvance Security",
-    description: "Started a cybersecurity company to protect the digital frontier.",
+    year: "Age 14",
+    title: "Cybersecurity Path Activated",
+    description: "Began formal cybersecurity training with focus on risk assessment, penetration testing, and cloud security—learning how systems fail, not just how they run.",
     icon: Shield,
     color: "primary",
   },
   {
-    year: "2024",
-    title: "35+ Projects Shipped",
-    description: "Consistent execution across web development, marketing, and security.",
-    icon: Award,
+    year: "Age 14",
+    title: "Cyvance Security Founded",
+    description: "Launched Cyvance Security, a cybersecurity firm focused on proactive defense, threat analysis, and digital resilience.",
+    icon: Shield,
+    color: "accent",
+  },
+  {
+    year: "Age 14",
+    title: "ArcNet Newsletter Launched",
+    description: "Started ArcNet, a newsletter breaking down technology, cybersecurity, and the future of digital systems in a clear, signal-over-noise format.",
+    icon: Newspaper,
+    color: "primary",
+  },
+  {
+    year: "Age 14",
+    title: "SynthaXia AI Released",
+    description: "Launched SynthaXia AI, an AI-powered tool designed to simplify workflows and push intelligent automation forward.",
+    icon: Sparkles,
     color: "accent",
   },
 ];
