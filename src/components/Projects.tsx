@@ -1,9 +1,15 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Layers } from "lucide-react";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Badge } from "./ui/badge";
+import { CircuitLines } from "./effects/CircuitLines";
+import { GlowOrb } from "./effects/GlowOrb";
+import { ParallaxLayer } from "./effects/ParallaxLayer";
+import { HolographicOverlay } from "./effects/HolographicOverlay";
+import { StatusIndicator } from "./effects/StatusIndicator";
+import { TechButton } from "./ui/TechButton";
 
 const projects = [
   {
@@ -87,25 +93,53 @@ export const Projects = () => {
 
   return (
     <section id="projects" ref={ref} className="py-20 lg:py-32 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-3xl -z-10" />
+      {/* Background layers */}
+      <div className="absolute inset-0 -z-20">
+        <div className="absolute inset-0 mesh-gradient opacity-30" />
+        <div className="absolute inset-0 circuit-bg opacity-20" />
+      </div>
+
+      {/* Animated glow orbs */}
+      <ParallaxLayer speed={0.2} className="absolute inset-0 -z-10">
+        <GlowOrb size={500} color="primary" className="top-1/4 -right-40" delay={0} />
+        <GlowOrb size={400} color="accent" className="bottom-1/3 -left-40" delay={2} />
+      </ParallaxLayer>
+
+      {/* Circuit lines overlay */}
+      <CircuitLines variant="section" />
+
+      {/* Holographic overlay */}
+      <HolographicOverlay intensity="subtle" />
       
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
+          {/* Status bar */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.2 }}
+            className="flex items-center justify-center gap-4 mb-6"
+          >
+            <StatusIndicator status="online" />
+            <span className="text-xs font-mono text-muted-foreground tracking-wider">
+              PORTFOLIO ACTIVE • {projects.length} PROJECTS LOADED
+            </span>
+          </motion.div>
+
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
-            Featured <span className="gradient-text bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Projects</span>
+            Featured <span className="gradient-text neon-text">Projects</span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Real projects. Real clients. Real results—not just case studies
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -115,7 +149,15 @@ export const Projects = () => {
               className="group cursor-pointer"
               onClick={() => setSelectedProject(project)}
             >
-              <div className="glass rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all border border-border/30">
+              <div className="cyber-card glass-card rounded-2xl overflow-hidden relative">
+                {/* Corner accents */}
+                <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden z-20">
+                  <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-accent/50 group-hover:border-accent transition-colors" />
+                </div>
+                <div className="absolute bottom-0 left-0 w-16 h-16 overflow-hidden z-20">
+                  <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-primary/50 group-hover:border-primary transition-colors" />
+                </div>
+
                 <div className="relative overflow-hidden aspect-video">
                   <img
                     src={project.image}
@@ -123,28 +165,47 @@ export const Projects = () => {
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300" />
+                  
+                  {/* Scanline effect on hover */}
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/10 to-transparent opacity-0 group-hover:opacity-100"
+                    animate={shouldReduceMotion ? {} : { y: ["-100%", "100%"] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                  />
+
                   <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-10 h-10 rounded-full glass flex items-center justify-center">
-                      <ExternalLink className="w-5 h-5 text-primary" />
+                    <div className="w-10 h-10 rounded-xl glass flex items-center justify-center border border-accent/30">
+                      <ExternalLink className="w-5 h-5 text-accent" />
                     </div>
                   </div>
                 </div>
-                <div className="p-8">
-                  <h3 className="text-2xl font-display font-bold mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-accent group-hover:bg-clip-text transition-all duration-300">
+
+                <div className="p-6 md:p-8 relative z-10">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Layers className="w-4 h-4 text-accent" />
+                    <span className="text-xs font-mono text-muted-foreground">{project.role}</span>
+                  </div>
+
+                  <h3 className="text-xl md:text-2xl font-display font-bold mb-3 group-hover:text-accent transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-muted-foreground mb-3 leading-relaxed">{project.description}</p>
-                  <p className="text-sm text-accent font-semibold mb-4 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-accent"></span>
+                  <p className="text-muted-foreground mb-3 leading-relaxed text-sm md:text-base">{project.description}</p>
+                  <p className="text-sm text-accent font-mono mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
                     {project.impact}
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="px-3 py-1 bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">
+                    {project.tags.slice(0, 3).map((tag) => (
+                      <Badge key={tag} variant="secondary" className="px-3 py-1 bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 font-mono text-xs">
                         {tag}
                       </Badge>
                     ))}
+                    {project.tags.length > 3 && (
+                      <Badge variant="secondary" className="px-3 py-1 bg-accent/10 text-accent border-accent/20">
+                        +{project.tags.length - 3}
+                      </Badge>
+                    )}
                   </div>
                 </div>
               </div>
@@ -154,38 +215,41 @@ export const Projects = () => {
 
         {/* Project Modal */}
         <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto glass border-border/50">
             {selectedProject && (
               <>
                 <DialogHeader>
-                  <DialogTitle className="text-2xl font-display">
+                  <DialogTitle className="text-2xl font-display gradient-text">
                     {selectedProject.title}
                   </DialogTitle>
                 </DialogHeader>
                 <div className="space-y-6">
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
+                  <div className="relative rounded-xl overflow-hidden">
+                    <img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="w-full"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
+                  </div>
                   <div>
-                    <h4 className="font-semibold mb-2">Problem & Solution</h4>
+                    <h4 className="font-semibold mb-2 text-accent font-mono text-sm">// PROBLEM & SOLUTION</h4>
                     <p className="text-muted-foreground">{selectedProject.details}</p>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2">My Role</h4>
+                    <h4 className="font-semibold mb-2 text-accent font-mono text-sm">// MY ROLE</h4>
                     <p className="text-muted-foreground">{selectedProject.role}</p>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2">Results & Impact</h4>
-                    <p className="text-accent font-medium">{selectedProject.impact}</p>
+                    <h4 className="font-semibold mb-2 text-accent font-mono text-sm">// RESULTS & IMPACT</h4>
+                    <p className="text-primary font-medium">{selectedProject.impact}</p>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-3">Tech Stack</h4>
+                    <h4 className="font-semibold mb-3 text-accent font-mono text-sm">// TECH STACK</h4>
                     <div className="flex flex-wrap gap-2">
                       {selectedProject.tags.map((tag) => (
-                        <Badge key={tag}>{tag}</Badge>
+                        <Badge key={tag} className="bg-primary/20 text-primary border-primary/30">{tag}</Badge>
                       ))}
                     </div>
                   </div>

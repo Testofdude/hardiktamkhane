@@ -1,7 +1,12 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Calendar, BookOpen, Rocket, TrendingUp, Sparkles, Download, Mail } from "lucide-react";
-import { Button } from "./ui/button";
+import { CircuitLines } from "./effects/CircuitLines";
+import { GlowOrb } from "./effects/GlowOrb";
+import { ParallaxLayer } from "./effects/ParallaxLayer";
+import { HolographicOverlay } from "./effects/HolographicOverlay";
+import { StatusIndicator } from "./effects/StatusIndicator";
+import { TechButton } from "./ui/TechButton";
 
 const timeline = [
   {
@@ -80,12 +85,26 @@ export const About = () => {
   };
 
   return (
-    <section id="about" ref={ref} className="py-20 lg:py-32 bg-background relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-accent/10 to-primary/10 rounded-full blur-3xl -z-10" />
+    <section id="about" ref={ref} className="py-20 lg:py-32 relative overflow-hidden">
+      {/* Background layers */}
+      <div className="absolute inset-0 -z-20">
+        <div className="absolute inset-0 mesh-gradient opacity-30" />
+        <div className="absolute inset-0 circuit-bg opacity-20" />
+      </div>
 
-      <div className="container mx-auto px-6">
+      {/* Animated glow orbs */}
+      <ParallaxLayer speed={0.2} className="absolute inset-0 -z-10">
+        <GlowOrb size={500} color="primary" className="-top-20 -right-40" delay={0} />
+        <GlowOrb size={400} color="accent" className="bottom-1/4 -left-40" delay={2} />
+      </ParallaxLayer>
+
+      {/* Circuit lines overlay */}
+      <CircuitLines variant="section" />
+
+      {/* Holographic overlay */}
+      <HolographicOverlay intensity="subtle" />
+
+      <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
@@ -93,8 +112,21 @@ export const About = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
+          {/* Status bar */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.2 }}
+            className="flex items-center justify-center gap-4 mb-6"
+          >
+            <StatusIndicator status="online" />
+            <span className="text-xs font-mono text-muted-foreground tracking-wider">
+              PROFILE LOADED • DATA VERIFIED
+            </span>
+          </motion.div>
+
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
-            About <span className="gradient-text bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Me</span>
+            About <span className="gradient-text neon-text">Me</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             From publishing my first book to founding two startups—driven by execution, not just ideas
@@ -111,7 +143,7 @@ export const About = () => {
             className="space-y-6"
           >
             <motion.div variants={itemVariants}>
-              <h3 className="text-2xl md:text-3xl font-display font-bold mb-4">
+              <h3 className="text-2xl md:text-3xl font-display font-bold mb-4 gradient-text">
                 Building, Shipping, Scaling
               </h3>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
@@ -122,9 +154,9 @@ export const About = () => {
 
             <motion.div variants={itemVariants}>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                Today, I run <span className="text-foreground font-semibold">Fusion Interpreter</span>, a performance marketing 
+                Today, I run <span className="text-accent font-semibold">Fusion Interpreter</span>, a performance marketing 
                 agency helping brands scale with data-driven Meta and LinkedIn campaigns. And I'm building{" "}
-                <span className="text-foreground font-semibold">Cyvance Security</span>, where we solve real cybersecurity 
+                <span className="text-primary font-semibold">Cyvance Security</span>, where we solve real cybersecurity 
                 challenges—penetration testing, risk assessment, and cloud infrastructure protection for businesses that can't afford breaches.
               </p>
             </motion.div>
@@ -139,30 +171,19 @@ export const About = () => {
 
             {/* CTA Buttons */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 pt-4">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
-                  variant="default"
-                  size="lg"
-                  className="w-full sm:w-auto rounded-full"
-                  onClick={() => window.open('/resume.pdf', '_blank')}
-                >
-                  <Download className="w-4 h-4 mr-2" />
-                  Download Resume
-                </Button>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full sm:w-auto rounded-full hover:bg-primary hover:text-primary-foreground hover:border-primary"
-                  asChild
-                >
-                  <a href="#contact">
-                    <Mail className="w-4 h-4 mr-2" />
-                    Contact Me
-                  </a>
-                </Button>
-              </motion.div>
+              <TechButton
+                variant="primary"
+                onClick={() => window.open('/resume.pdf', '_blank')}
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Download Resume
+              </TechButton>
+              <TechButton variant="outline">
+                <a href="#contact" className="flex items-center gap-2">
+                  <Mail className="w-4 h-4" />
+                  Contact Me
+                </a>
+              </TechButton>
             </motion.div>
           </motion.div>
 
@@ -179,17 +200,17 @@ export const About = () => {
                 initial={shouldReduceMotion ? {} : { opacity: 0, scale: 0.8 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="glass rounded-3xl p-8 text-center shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all border border-border/30 relative overflow-hidden group"
+                whileHover={shouldReduceMotion ? {} : { scale: 1.05, y: -5 }}
+                className="cyber-card glass-card rounded-2xl p-8 text-center relative overflow-hidden group"
               >
                 {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
                 <div className="relative z-10">
-                  <div className="text-4xl md:text-5xl font-display font-bold gradient-text bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-2">
+                  <div className="text-4xl md:text-5xl font-display font-bold gradient-text neon-text mb-2">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-muted-foreground font-semibold tracking-wide">{stat.label}</div>
+                  <div className="text-sm text-muted-foreground font-mono tracking-wide">{stat.label}</div>
                 </div>
               </motion.div>
             ))}
@@ -205,8 +226,8 @@ export const About = () => {
             className="text-center mb-12"
           >
             <h3 className="text-3xl md:text-4xl font-display font-bold mb-4 inline-flex items-center gap-3">
-              <Calendar className="w-8 h-8 text-primary" />
-              My Journey
+              <Calendar className="w-8 h-8 text-accent" />
+              <span className="gradient-text">My Journey</span>
             </h3>
           </motion.div>
 
@@ -214,34 +235,38 @@ export const About = () => {
             {/* Timeline line */}
             <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary hidden md:block" />
 
-            <div className="space-y-8">
+            <div className="space-y-6">
               {timeline.map((item, index) => (
                 <motion.div
                   key={item.title}
-                  initial={shouldReduceMotion ? {} : { opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                  initial={shouldReduceMotion ? {} : { opacity: 0, x: -30 }}
                   animate={timelineInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
-                  whileHover={{ scale: 1.02, x: 10 }}
-                  className="glass rounded-3xl p-8 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all border border-border/30 group relative overflow-hidden"
+                  transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+                  whileHover={shouldReduceMotion ? {} : { scale: 1.02, x: 10 }}
+                  className="cyber-card glass-card rounded-2xl p-6 md:p-8 group relative overflow-hidden md:ml-12"
                 >
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
                   {/* Timeline dot */}
-                  <div className="absolute -left-3 top-8 w-6 h-6 rounded-full bg-gradient-to-r from-primary to-accent border-4 border-background hidden md:block shadow-lg shadow-primary/50" />
-
-                  <div className="flex-shrink-0 relative">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:from-primary/30 group-hover:to-accent/30 transition-all duration-300 shadow-lg">
-                      <item.icon className="w-8 h-8 text-primary" />
-                    </div>
+                  <div className="absolute -left-[3.25rem] top-8 w-6 h-6 rounded-full bg-gradient-to-r from-primary to-accent border-4 border-background hidden md:flex items-center justify-center shadow-lg shadow-primary/50">
+                    <div className="w-2 h-2 rounded-full bg-background" />
                   </div>
 
-                  <div className="flex-1 relative z-10">
-                    <div className="text-sm font-bold text-accent mb-2 tracking-wider uppercase">{item.year}</div>
-                    <h4 className="text-xl font-display font-bold mb-3 group-hover:text-primary transition-colors">
-                      {item.title}
-                    </h4>
-                    <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                  <div className="flex items-start gap-4 relative z-10">
+                    <div className="flex-shrink-0">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:from-primary/30 group-hover:to-accent/30 transition-all duration-300 shadow-lg">
+                        <item.icon className="w-7 h-7 text-accent" />
+                      </div>
+                    </div>
+
+                    <div className="flex-1">
+                      <div className="text-sm font-mono text-accent mb-1 tracking-wider">{item.year}</div>
+                      <h4 className="text-lg md:text-xl font-display font-bold mb-2 group-hover:text-accent transition-colors">
+                        {item.title}
+                      </h4>
+                      <p className="text-muted-foreground text-sm md:text-base leading-relaxed">{item.description}</p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
