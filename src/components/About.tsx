@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Calendar, BookOpen, Rocket, TrendingUp, Sparkles, Download, Mail } from "lucide-react";
+import { Calendar, BookOpen, Rocket, TrendingUp, Sparkles, Mail } from "lucide-react";
 import { CircuitLines } from "./effects/CircuitLines";
 import { GlowOrb } from "./effects/GlowOrb";
 import { ParallaxLayer } from "./effects/ParallaxLayer";
@@ -173,16 +173,10 @@ export const About = () => {
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 pt-4">
               <TechButton
                 variant="primary"
-                onClick={() => window.open('/resume.pdf', '_blank')}
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
               >
-                <Download className="w-4 h-4 mr-2" />
-                Download Resume
-              </TechButton>
-              <TechButton variant="outline">
-                <a href="#contact" className="flex items-center gap-2">
-                  <Mail className="w-4 h-4" />
-                  Contact Me
-                </a>
+                <Mail className="w-4 h-4 mr-2" />
+                Contact Me
               </TechButton>
             </motion.div>
           </motion.div>

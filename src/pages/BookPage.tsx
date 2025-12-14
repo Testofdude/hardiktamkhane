@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue, useInView, 
 import { ArrowRight, BookOpen, TrendingUp, Shield, Target, Lightbulb, ChevronDown, Sparkles, DollarSign, PieChart, BarChart3, Play } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import bookCover from "@/assets/book-cover.png";
 
 // Physics-based spring config for Apple-like feel
 const springConfig = { stiffness: 100, damping: 30, mass: 1 };
@@ -177,16 +178,21 @@ const Book3DPremium = () => {
         <motion.div
           className="relative w-full h-full rounded-xl overflow-hidden"
           style={{
-            background: "linear-gradient(145deg, hsl(240 12% 12%), hsl(240 12% 8%))",
-            boxShadow: "inset 0 2px 4px hsl(0 0% 100% / 0.1), inset 0 -2px 4px hsl(0 0% 0% / 0.3)",
             transformStyle: "preserve-3d",
           }}
           animate={{ y: [0, -8, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
+          {/* Real Book Cover Image */}
+          <img 
+            src={bookCover} 
+            alt="The Power of Financial Clarity by Hardik Tamkhane"
+            className="w-full h-full object-cover rounded-xl"
+          />
+
           {/* Holographic overlay */}
           <motion.div
-            className="absolute inset-0 opacity-30"
+            className="absolute inset-0 opacity-20 pointer-events-none"
             style={{
               background: "linear-gradient(125deg, hsl(263 70% 65% / 0.3) 0%, transparent 30%, hsl(189 94% 43% / 0.3) 50%, transparent 70%, hsl(263 70% 65% / 0.3) 100%)",
               backgroundSize: "200% 200%",
@@ -194,55 +200,6 @@ const Book3DPremium = () => {
             animate={{ backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"] }}
             transition={{ duration: 8, repeat: Infinity }}
           />
-
-          {/* Cover content */}
-          <div className="relative z-10 h-full flex flex-col items-center justify-center p-8 text-center">
-            {/* Glowing icon */}
-            <motion.div
-              className="relative w-20 h-20 mb-6"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent blur-xl opacity-50" />
-              <div className="relative w-full h-full rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <DollarSign className="w-10 h-10 text-white" />
-              </div>
-            </motion.div>
-
-            <motion.h3
-              className="text-xl font-display font-medium text-foreground/90 mb-1"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-            >
-              The Power of
-            </motion.h3>
-            <motion.h2
-              className="text-2xl md:text-3xl font-display font-bold gradient-text mb-6"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 }}
-            >
-              Financial Clarity
-            </motion.h2>
-
-            {/* Decorative line */}
-            <motion.div
-              className="w-16 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mb-6"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ delay: 1, duration: 0.8 }}
-            />
-
-            <motion.p
-              className="text-sm text-muted-foreground"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.1 }}
-            >
-              By Hardik Tamkhane
-            </motion.p>
-          </div>
 
           {/* Scan line effect */}
           <motion.div

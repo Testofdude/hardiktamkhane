@@ -39,15 +39,15 @@ const TechStat = ({ value, label, icon: Icon }: { value: string; label: string; 
   
   return (
     <motion.div
-      className="glass-card p-4 rounded-xl flex items-center gap-3"
+      className="glass-card p-3 sm:p-4 rounded-xl flex items-center gap-2 sm:gap-3"
       whileHover={shouldReduceMotion ? {} : { scale: 1.05, y: -2 }}
     >
-      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-        <Icon className="w-5 h-5 text-accent" />
+      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0">
+        <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-accent" />
       </div>
-      <div>
-        <div className="text-lg font-display font-bold gradient-text">{value}</div>
-        <div className="text-xs text-muted-foreground">{label}</div>
+      <div className="min-w-0">
+        <div className="text-base sm:text-lg font-display font-bold gradient-text">{value}</div>
+        <div className="text-[10px] sm:text-xs text-muted-foreground truncate">{label}</div>
       </div>
     </motion.div>
   );
@@ -216,7 +216,7 @@ export const Hero = () => {
           {/* Stats row */}
           <motion.div
             variants={itemVariants}
-            className="grid grid-cols-3 gap-4 mb-10 max-w-lg"
+            className="grid grid-cols-3 gap-2 sm:gap-4 mb-10 max-w-lg"
           >
             <TechStat value="35+" label="Projects" icon={Code} />
             <TechStat value="2" label="Startups" icon={Zap} />
@@ -226,7 +226,7 @@ export const Hero = () => {
           {/* CTA Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4"
           >
             <TechButton
               variant="primary"
@@ -242,11 +242,11 @@ export const Hero = () => {
               </motion.span>
             </TechButton>
             
-            <TechButton variant="outline" size="lg">
-              <Link to="/contact" className="flex items-center gap-2">
+            <Link to="/contact">
+              <TechButton variant="outline" size="lg" className="w-full sm:w-auto">
                 Initialize Contact
-              </Link>
-            </TechButton>
+              </TechButton>
+            </Link>
           </motion.div>
         </motion.div>
 

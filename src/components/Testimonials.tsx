@@ -169,12 +169,12 @@ export const Testimonials = () => {
           <p className="text-lg md:text-xl text-muted-foreground mb-6 font-mono">
             Want to work together?
           </p>
-          <TechButton variant="primary" size="lg">
-            <Link to="/contact" className="flex items-center gap-2">
+          <Link to="/contact">
+            <TechButton variant="primary" size="lg">
               <Mail className="w-4 h-4" />
               Contact Me Today
-            </Link>
-          </TechButton>
+            </TechButton>
+          </Link>
         </motion.div>
       </div>
     </section>
