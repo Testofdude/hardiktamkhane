@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { ExternalLink, Layers } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Badge } from "./ui/badge";
 import { CircuitLines } from "./effects/CircuitLines";
@@ -11,18 +12,19 @@ import { HolographicOverlay } from "./effects/HolographicOverlay";
 import { StatusIndicator } from "./effects/StatusIndicator";
 import { TechButton } from "./ui/TechButton";
 
+import bookCover from "@/assets/book-cover.png";
+
 const projects = [
   {
     id: 1,
     title: "Cyvance Security",
     description: "Cybersecurity solutions platform focused on risk assessment and threat detection",
     impact: "Helping organizations identify vulnerabilities and strengthen security posture",
-    role: "Security Consultant & Developer",
+    role: "Founder & Security Consultant",
     tags: ["Cybersecurity", "Risk Assessment", "Penetration Testing", "Cloud Security"],
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
     details: "Cyvance Security provides comprehensive cybersecurity solutions including risk assessment, penetration testing, and cloud security implementation. The platform helps organizations identify vulnerabilities, assess threats, and implement robust security measures to protect their digital assets and infrastructure.",
-    link: "#",
-    github: "#",
+    link: "https://cyvance.in/",
   },
   {
     id: 2,
@@ -33,20 +35,19 @@ const projects = [
     tags: ["React", "Next.js", "Analytics", "Marketing"],
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
     details: "Built the complete digital presence for Fusion Interpreter, a performance marketing agency specializing in Meta marketing and LinkedIn advertising. The platform includes campaign management tools, analytics dashboards, and client reporting systems to deliver measurable results.",
-    link: "#",
-    github: "#",
+    link: "https://fusioninterpreter.com/",
   },
   {
     id: 3,
-    title: "Luxury Perfume E-Commerce",
-    description: "Premium perfume website with stunning transitions and interactive effects",
-    impact: "Engaging user experience with smooth animations and modern design",
-    role: "Full-Stack Developer & Designer",
-    tags: ["Next.js", "Framer Motion", "Tailwind", "E-Commerce"],
-    image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80",
-    details: "Designed and developed a high-end e-commerce website for a luxury perfume brand. Features include smooth page transitions, interactive product showcases, parallax effects, and an elegant checkout experience. Focused on creating a premium feel that matches the brand identity.",
-    link: "#",
-    github: "#",
+    title: "The Power of Financial Clarity",
+    description: "A comprehensive guide to mastering money management and building wealth",
+    impact: "Published book educating readers on financial fundamentals",
+    role: "Author",
+    tags: ["Finance", "Education", "Writing", "Wealth Building"],
+    image: bookCover,
+    details: "Authored and published 'The Power of Financial Clarity' covering essential topics including investing basics, trading strategies, compound interest principles, and wealth-building fundamentals. Written to make financial concepts accessible and actionable for a wide audience.",
+    link: "/thepoweroffinancialclarity",
+    isInternal: true,
   },
   {
     id: 4,
@@ -58,31 +59,17 @@ const projects = [
     image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
     details: "Created an automated stock trading signal bot that analyzes market data using Simple Moving Average (SMA) logic to identify potential trading opportunities. The bot sends real-time alerts via Telegram, helping traders make informed decisions based on technical indicators.",
     link: "#",
-    github: "#",
   },
   {
     id: 5,
-    title: "Finance Education Book",
-    description: "Comprehensive guide covering investing, trading, and financial literacy",
-    impact: "Published in 2024, educating readers on financial fundamentals",
-    role: "Author",
-    tags: ["Finance", "Education", "Writing", "Marketing"],
-    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80",
-    details: "Authored and published a finance book covering essential topics including investing basics, trading strategies, compound interest principles, and marketing fundamentals. Written to make financial concepts accessible and engaging for a wide audience.",
-    link: "#",
-    github: "#",
-  },
-  {
-    id: 6,
     title: "Educational YouTube Channel",
     description: "Creating educational content for aspiring developers and marketers",
-    impact: "Growing community of 50+ subscribers with engaging tutorials",
+    impact: "Growing community with engaging tutorials",
     role: "Content Creator & Educator",
     tags: ["YouTube", "Education", "Content", "Community"],
     image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80",
     details: "Building an educational YouTube channel focused on web development, digital marketing, and entrepreneurship. Creating practical tutorials, case studies, and insights to help others learn and grow in the tech and marketing space.",
-    link: "#",
-    github: "#",
+    link: "https://www.youtube.com/@Hardik_SMFCYA",
   },
 ];
 
@@ -228,7 +215,7 @@ export const Projects = () => {
                     <img
                       src={selectedProject.image}
                       alt={selectedProject.title}
-                      className="w-full"
+                      className="w-full max-h-64 object-cover"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
@@ -253,6 +240,25 @@ export const Projects = () => {
                       ))}
                     </div>
                   </div>
+                  {selectedProject.link && selectedProject.link !== "#" && (
+                    <div className="pt-4">
+                      {(selectedProject as any).isInternal ? (
+                        <Link to={selectedProject.link}>
+                          <TechButton variant="primary" className="w-full">
+                            <ExternalLink className="w-4 h-4 mr-2" />
+                            View Project
+                          </TechButton>
+                        </Link>
+                      ) : (
+                        <a href={selectedProject.link} target="_blank" rel="noopener noreferrer">
+                          <TechButton variant="primary" className="w-full">
+                            <ExternalLink className="w-4 h-4 mr-2" />
+                            Visit Website
+                          </TechButton>
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
               </>
             )}
