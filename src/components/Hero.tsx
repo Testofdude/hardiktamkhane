@@ -134,16 +134,44 @@ export const Hero = () => {
             </span>
           </motion.div>
 
-          {/* Main heading */}
+          {/* Name with signature effect */}
+          <motion.div variants={itemVariants} className="mb-4">
+            <motion.span 
+              className="text-sm md:text-base font-mono text-accent tracking-[0.3em] uppercase"
+              initial={{ opacity: 0, letterSpacing: "0.5em" }}
+              animate={{ opacity: 1, letterSpacing: "0.3em" }}
+              transition={{ duration: 1, delay: 0.5 }}
+            >
+              I'm
+            </motion.span>
+          </motion.div>
+
+          {/* Main name */}
           <motion.h1
             variants={itemVariants}
-            className={`text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] mb-6 ${
+            className={`text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] mb-4 ${
               glitchText ? "animate-pulse" : ""
             }`}
           >
-            <span className="block text-foreground/90">Building the</span>
-            <span className="block gradient-text neon-text">
-              Future of Tech
+            <span className="block gradient-text neon-text relative">
+              Hardik
+              <motion.span
+                className="absolute -right-2 md:-right-4 top-0 w-2 h-2 md:w-3 md:h-3 rounded-full bg-accent"
+                animate={shouldReduceMotion ? {} : { 
+                  scale: [1, 1.5, 1],
+                  opacity: [1, 0.5, 1]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </span>
+            <span className="block text-foreground/90 relative">
+              Tamkhane
+              <motion.div 
+                className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-primary via-accent to-transparent rounded-full"
+                initial={{ width: 0 }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 1.2, delay: 1 }}
+              />
             </span>
           </motion.h1>
 
@@ -163,9 +191,26 @@ export const Hero = () => {
             variants={itemVariants}
             className="text-base md:text-lg text-muted-foreground/80 leading-relaxed max-w-xl mb-8"
           >
-            Building two startups—Cyvance Security and Fusion Interpreter—while scaling 
-            cybersecurity solutions and performance marketing campaigns. Published author. 
-            35+ projects shipped. Turning ideas into impact.
+            Building two startups—
+            <a 
+              href="https://cyvance.in/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary hover:text-primary/80 transition-colors underline-offset-4 hover:underline"
+            >
+              Cyvance Security
+            </a>
+            {" "}and{" "}
+            <a 
+              href="https://fusioninterpreter.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-accent hover:text-accent/80 transition-colors underline-offset-4 hover:underline"
+            >
+              Fusion Interpreter
+            </a>
+            —while scaling cybersecurity solutions and performance marketing campaigns. 
+            Published author. 35+ projects shipped. Turning ideas into impact.
           </motion.p>
 
           {/* Stats row */}
