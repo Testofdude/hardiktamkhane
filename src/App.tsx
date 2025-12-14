@@ -12,6 +12,7 @@ import CasesPage from "./pages/CasesPage";
 import BookPage from "./pages/BookPage";
 import NotFound from "./pages/NotFound";
 import { CyberCursor } from "./components/effects/CyberCursor";
+import { ScrollToTop } from "./components/effects/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
       <Sonner />
       <CyberCursor />
       <BrowserRouter>
+        <ScrollToTop />
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<Index />} />
