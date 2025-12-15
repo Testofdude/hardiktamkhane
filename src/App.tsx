@@ -10,6 +10,7 @@ import ContactPage from "./pages/ContactPage";
 import ServicesPage from "./pages/ServicesPage";
 import CasesPage from "./pages/CasesPage";
 import BookPage from "./pages/BookPage";
+import FoundedPage from "./pages/FoundedPage";
 import NotFound from "./pages/NotFound";
 import { CyberCursor } from "./components/effects/CyberCursor";
 import { ScrollToTop } from "./components/effects/ScrollToTop";
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/cases" element={<CasesPage />} />
             <Route path="/thepoweroffinancialclarity" element={<BookPage />} />
+            <Route path="/founded" element={<FoundedPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
