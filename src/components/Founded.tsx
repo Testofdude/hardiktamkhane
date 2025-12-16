@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface VentureNode {
   id: string;
@@ -92,38 +93,15 @@ const ventures: VentureNode[] = [
   },
 ];
 
-const EcosystemNode = ({
-  venture,
-  isHovered,
-  onHover,
-  onLeave,
-  mousePosition,
-}: {
-  venture: VentureNode;
-  isHovered: boolean;
-  onHover: () => void;
-  onLeave: () => void;
-  mousePosition: { x: number; y: number };
-}) => {
+const statusColors: Record<string, string> = {
+  Live: "bg-emerald-500",
+  Building: "bg-amber-500",
+  Scaling: "bg-primary",
+};
+
+// Mobile card component - simpler, no magnetic effects
+const MobileVentureCard = ({ venture }: { venture: VentureNode }) => {
   const navigate = useNavigate();
-  const nodeRef = useRef<HTMLDivElement>(null);
-  const [magneticOffset, setMagneticOffset] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    if (!nodeRef.current || !isHovered) {
-      setMagneticOffset({ x: 0, y: 0 });
-      return;
-    }
-
-    const rect = nodeRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    const deltaX = (mousePosition.x - centerX) * 0.15;
-    const deltaY = (mousePosition.y - centerY) * 0.15;
-
-    setMagneticOffset({ x: deltaX, y: deltaY });
-  }, [mousePosition, isHovered]);
 
   const handleClick = () => {
     if (venture.link) {
@@ -137,24 +115,75 @@ const EcosystemNode = ({
     }
   };
 
-  const statusColors = {
-    Live: "bg-emerald-500",
-    Building: "bg-amber-500",
-    Scaling: "bg-primary",
+  return (
+    <motion.div
+      className="glass-card rounded-xl p-4 border border-border/30 cursor-pointer active:scale-[0.98] transition-transform"
+      onClick={handleClick}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4 }}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex-1 min-w-0">
+          <h3 className="font-display font-semibold text-foreground text-sm mb-1 truncate">
+            {venture.name}
+          </h3>
+          <p className="font-mono text-[10px] text-accent uppercase tracking-wider mb-2">
+            {venture.domain}
+          </p>
+          <p className="text-xs text-muted-foreground line-clamp-2">{venture.impact}</p>
+        </div>
+        <span
+          className={`shrink-0 px-2 py-0.5 rounded-full text-[9px] font-mono ${statusColors[venture.status]} text-background`}
+        >
+          {venture.status}
+        </span>
+      </div>
+    </motion.div>
+  );
+};
+
+// Desktop node component with magnetic effects
+const DesktopEcosystemNode = ({
+  venture,
+  isHovered,
+  onHover,
+  onLeave,
+  magneticOffset,
+}: {
+  venture: VentureNode;
+  isHovered: boolean;
+  onHover: () => void;
+  onLeave: () => void;
+  magneticOffset: { x: number; y: number };
+}) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (venture.link) {
+      if (venture.link.startsWith("http")) {
+        window.open(venture.link, "_blank");
+      } else {
+        navigate(venture.link);
+      }
+    } else {
+      navigate("/founded");
+    }
   };
 
   return (
     <motion.div
-      ref={nodeRef}
-      className="absolute cursor-pointer group"
+      className="absolute cursor-pointer"
       style={{
         left: `${venture.position.x}%`,
         top: `${venture.position.y}%`,
         transform: "translate(-50%, -50%)",
+        willChange: isHovered ? "transform" : "auto",
       }}
       animate={{
-        x: magneticOffset.x,
-        y: magneticOffset.y,
+        x: isHovered ? magneticOffset.x : 0,
+        y: isHovered ? magneticOffset.y : 0,
         scale: isHovered ? 1.05 : 1,
       }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
@@ -163,52 +192,47 @@ const EcosystemNode = ({
       onClick={handleClick}
     >
       {/* Glow effect */}
-      <motion.div
-        className="absolute inset-0 rounded-2xl opacity-0 blur-xl"
-        style={{
-          background: "radial-gradient(circle, hsl(263 70% 65% / 0.4), transparent 70%)",
-        }}
-        animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1.5 : 1 }}
-        transition={{ duration: 0.3 }}
-      />
+      {isHovered && (
+        <div
+          className="absolute inset-0 rounded-2xl blur-xl"
+          style={{
+            background: "radial-gradient(circle, hsl(263 70% 65% / 0.4), transparent 70%)",
+            transform: "scale(1.5)",
+          }}
+        />
+      )}
 
       {/* Node card */}
-      <motion.div
-        className="relative glass-card rounded-2xl p-4 md:p-5 min-w-[160px] md:min-w-[200px] border border-border/30"
-        animate={{
+      <div
+        className="relative glass-card rounded-2xl p-5 min-w-[200px] border transition-all duration-300"
+        style={{
           borderColor: isHovered ? "hsl(263 70% 65% / 0.5)" : "hsl(0 0% 100% / 0.06)",
           boxShadow: isHovered
             ? "0 0 40px hsl(263 70% 65% / 0.2), 0 8px 32px hsl(0 0% 0% / 0.4)"
             : "0 4px 24px hsl(0 0% 0% / 0.3)",
         }}
-        transition={{ duration: 0.3 }}
       >
         {/* Pulse indicator */}
-        <motion.div
-          className="absolute -top-1 -right-1 w-3 h-3 rounded-full"
-          style={{ backgroundColor: statusColors[venture.status].replace("bg-", "") }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [1, 0.7, 1],
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <span className={`absolute inset-0 rounded-full ${statusColors[venture.status]}`} />
-        </motion.div>
+        <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full">
+          <span className={`absolute inset-0 rounded-full ${statusColors[venture.status]} animate-pulse`} />
+        </div>
 
         <div className="relative z-10">
-          <h3 className="font-display font-semibold text-foreground text-sm md:text-base mb-1">
+          <h3 className="font-display font-semibold text-foreground text-base mb-1">
             {venture.name}
           </h3>
-          <p className="font-mono text-[10px] md:text-xs text-accent uppercase tracking-wider mb-2">
+          <p className="font-mono text-xs text-accent uppercase tracking-wider mb-2">
             {venture.domain}
           </p>
 
           {/* Expandable content on hover */}
-          <motion.div
-            className="overflow-hidden"
-            animate={{ height: isHovered ? "auto" : 0, opacity: isHovered ? 1 : 0 }}
-            transition={{ duration: 0.3 }}
+          <div
+            className="overflow-hidden transition-all duration-300"
+            style={{ 
+              height: isHovered ? "auto" : 0, 
+              opacity: isHovered ? 1 : 0,
+              maxHeight: isHovered ? "100px" : 0,
+            }}
           >
             <p className="text-xs text-muted-foreground mb-2">{venture.impact}</p>
             <div className="flex items-center gap-2">
@@ -218,13 +242,14 @@ const EcosystemNode = ({
                 {venture.status}
               </span>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 };
 
+// Simplified connection lines - no continuous animation
 const ConnectionLines = ({
   ventures,
   hoveredId,
@@ -288,7 +313,7 @@ const ConnectionLines = ({
         const isActive = hoveredId === line.from || hoveredId === line.to;
 
         return (
-          <motion.line
+          <line
             key={index}
             x1={from.x}
             y1={from.y}
@@ -297,16 +322,9 @@ const ConnectionLines = ({
             stroke={isActive ? "url(#lineGradientActive)" : "url(#lineGradient)"}
             strokeWidth={isActive ? 2 : 1}
             strokeDasharray="8 4"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{
-              pathLength: 1,
+            style={{
               opacity: isActive ? 1 : 0.4,
-              strokeDashoffset: [0, -24],
-            }}
-            transition={{
-              pathLength: { duration: 1.5, delay: index * 0.1 },
-              opacity: { duration: 0.3 },
-              strokeDashoffset: { duration: 2, repeat: Infinity, ease: "linear" },
+              transition: "opacity 0.3s, stroke-width 0.3s",
             }}
           />
         );
@@ -321,36 +339,63 @@ export const Founded = () => {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const shouldReduceMotion = useReducedMotion();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [magneticOffset, setMagneticOffset] = useState({ x: 0, y: 0 });
+
+  // Throttled mouse move handler for desktop only
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (isMobile || !hoveredNode) return;
+    
+    const nodes = document.querySelectorAll('[data-venture-id]');
+    nodes.forEach((node) => {
+      if ((node as HTMLElement).dataset.ventureId === hoveredNode) {
+        const rect = node.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        setMagneticOffset({
+          x: (e.clientX - centerX) * 0.12,
+          y: (e.clientY - centerY) * 0.12,
+        });
+      }
+    });
+  }, [hoveredNode, isMobile]);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+    if (isMobile) return;
+    
+    let rafId: number;
+    let lastX = 0;
+    let lastY = 0;
+    
+    const throttledHandler = (e: MouseEvent) => {
+      // Only update if mouse moved significantly
+      if (Math.abs(e.clientX - lastX) > 5 || Math.abs(e.clientY - lastY) > 5) {
+        lastX = e.clientX;
+        lastY = e.clientY;
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => handleMouseMove(e));
+      }
     };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+    
+    window.addEventListener("mousemove", throttledHandler, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", throttledHandler);
+      cancelAnimationFrame(rafId);
+    };
+  }, [handleMouseMove, isMobile]);
 
   return (
     <section
       ref={sectionRef}
       id="founded"
-      className="relative py-24 md:py-32 overflow-hidden"
+      className="relative py-16 md:py-24 lg:py-32 overflow-hidden"
       aria-labelledby="founded-heading"
     >
-      {/* Cinematic grain overlay */}
+      {/* Ambient glow - simplified */}
       <div
-        className="absolute inset-0 opacity-[0.015] pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
-      {/* Ambient glow */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] pointer-events-none"
         style={{
           background: "radial-gradient(circle, hsl(263 70% 65% / 0.06) 0%, transparent 60%)",
         }}
@@ -359,10 +404,10 @@ export const Founded = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Header */}
         <motion.div
-          className="text-center mb-16 md:mb-24"
+          className="text-center mb-10 md:mb-16 lg:mb-24"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6 }}
         >
           <motion.div
             className="inline-block mb-4"
@@ -370,20 +415,20 @@ export const Founded = () => {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.2 }}
           >
-            <span className="font-mono text-xs text-accent uppercase tracking-[0.3em] px-4 py-2 rounded-full border border-accent/20 bg-accent/5">
+            <span className="font-mono text-[10px] md:text-xs text-accent uppercase tracking-[0.2em] md:tracking-[0.3em] px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-accent/20 bg-accent/5">
               Founder Console
             </span>
           </motion.div>
 
           <h2
             id="founded-heading"
-            className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 max-w-4xl mx-auto"
+            className="font-display text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 max-w-4xl mx-auto leading-tight"
           >
             <motion.span
               className="block"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3, duration: 0.8 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
             >
               I build companies before
             </motion.span>
@@ -391,83 +436,95 @@ export const Founded = () => {
               className="block gradient-text"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.5, duration: 0.8 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
             >
               trends become crowded.
             </motion.span>
           </h2>
 
           <motion.p
-            className="font-mono text-sm md:text-base text-muted-foreground tracking-wider"
+            className="font-mono text-[10px] sm:text-xs md:text-sm text-muted-foreground tracking-wider"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.7 }}
+            transition={{ delay: 0.5 }}
           >
             Startups • Cybersecurity • Marketing • AI • Media Systems
           </motion.p>
         </motion.div>
 
-        {/* Ecosystem Grid */}
-        <motion.div
-          ref={ecosystemRef}
-          className="relative h-[500px] md:h-[600px] lg:h-[700px] mb-16"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.5, duration: 1 }}
-        >
-          {/* Background grid */}
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{
-              backgroundImage: `
-                linear-gradient(90deg, hsl(263 70% 65% / 0.03) 1px, transparent 1px),
-                linear-gradient(180deg, hsl(263 70% 65% / 0.03) 1px, transparent 1px)
-              `,
-              backgroundSize: "60px 60px",
-            }}
-          />
-
-          {/* Connection lines */}
-          <ConnectionLines ventures={ventures} hoveredId={hoveredNode} containerRef={ecosystemRef} />
-
-          {/* Venture nodes */}
-          {ventures.map((venture, index) => (
-            <motion.div
-              key={venture.id}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{
-                delay: shouldReduceMotion ? 0 : 0.8 + index * 0.1,
-                duration: 0.5,
-                type: "spring",
+        {/* Mobile: Simple grid layout */}
+        {isMobile ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+            {ventures.map((venture) => (
+              <MobileVentureCard key={venture.id} venture={venture} />
+            ))}
+          </div>
+        ) : (
+          /* Desktop: Ecosystem Grid with nodes */
+          <motion.div
+            ref={ecosystemRef}
+            className="relative h-[500px] md:h-[600px] lg:h-[700px] mb-16"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.4, duration: 0.8 }}
+          >
+            {/* Background grid */}
+            <div
+              className="absolute inset-0 opacity-20"
+              style={{
+                backgroundImage: `
+                  linear-gradient(90deg, hsl(263 70% 65% / 0.03) 1px, transparent 1px),
+                  linear-gradient(180deg, hsl(263 70% 65% / 0.03) 1px, transparent 1px)
+                `,
+                backgroundSize: "60px 60px",
               }}
-            >
-              <EcosystemNode
-                venture={venture}
-                isHovered={hoveredNode === venture.id}
-                onHover={() => setHoveredNode(venture.id)}
-                onLeave={() => setHoveredNode(null)}
-                mousePosition={mousePosition}
-              />
-            </motion.div>
-          ))}
-        </motion.div>
+            />
+
+            {/* Connection lines */}
+            <ConnectionLines ventures={ventures} hoveredId={hoveredNode} containerRef={ecosystemRef} />
+
+            {/* Venture nodes */}
+            {ventures.map((venture, index) => (
+              <motion.div
+                key={venture.id}
+                data-venture-id={venture.id}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{
+                  delay: shouldReduceMotion ? 0 : 0.5 + index * 0.08,
+                  duration: 0.4,
+                }}
+              >
+                <DesktopEcosystemNode
+                  venture={venture}
+                  isHovered={hoveredNode === venture.id}
+                  onHover={() => setHoveredNode(venture.id)}
+                  onLeave={() => {
+                    setHoveredNode(null);
+                    setMagneticOffset({ x: 0, y: 0 });
+                  }}
+                  magneticOffset={hoveredNode === venture.id ? magneticOffset : { x: 0, y: 0 }}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
 
         {/* CTA */}
         <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.2 }}
+          transition={{ delay: 0.8 }}
         >
           <button
             onClick={() => navigate("/founded")}
-            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full glass-card border border-primary/30 hover:border-primary/60 transition-all duration-500 hover:shadow-[0_0_40px_hsl(263_70%_65%_/_0.2)]"
+            className="group inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 rounded-full glass-card border border-primary/30 hover:border-primary/60 transition-all duration-300 hover:shadow-[0_0_40px_hsl(263_70%_65%_/_0.2)] active:scale-[0.98]"
           >
-            <span className="font-display font-medium text-foreground">
+            <span className="font-display font-medium text-foreground text-sm md:text-base">
               Explore Everything I've Founded
             </span>
-            <ArrowRight className="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-primary group-hover:translate-x-1 transition-transform" />
           </button>
         </motion.div>
       </div>
