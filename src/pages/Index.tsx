@@ -11,10 +11,11 @@ import { Blog } from "@/components/Blog";
 import { BookCTA } from "@/components/BookCTA";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { PageTransition } from "@/components/layout/PageTransition";
 
 const Index = () => {
   return (
-    <>
+    <PageTransition>
       <SkipToContent />
       <Navbar />
       <main id="main-content">
@@ -30,7 +31,7 @@ const Index = () => {
         <Contact />
       </main>
       <Footer />
-    </>
+    </PageTransition>
   );
 };
 
