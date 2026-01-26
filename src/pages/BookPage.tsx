@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue, useInView, 
 import { ArrowRight, BookOpen, TrendingUp, Shield, Target, Lightbulb, ChevronDown, Sparkles, DollarSign, PieChart, BarChart3, Play } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { PageTransition } from "@/components/layout/PageTransition";
 import bookCover from "@/assets/book-cover.png";
 
 // Physics-based spring config for Apple-like feel
@@ -673,6 +674,7 @@ const BookPage = () => {
   ];
 
   return (
+    <PageTransition>
     <div ref={containerRef} className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
 
@@ -1020,6 +1022,7 @@ const BookPage = () => {
 
       <Footer />
     </div>
+    </PageTransition>
   );
 };
 
