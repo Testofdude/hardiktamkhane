@@ -25,9 +25,10 @@ export const HolographicOverlay = ({ className = "", intensity = "subtle" }: Hol
               0deg,
               transparent,
               transparent 2px,
-              hsl(0 0% 100% / ${opacityMap[intensity] / 2}) 2px,
-              hsl(0 0% 100% / ${opacityMap[intensity] / 2}) 4px
+              var(--scan-line-color, hsl(0 0% 100%)) ${opacityMap[intensity] / 2 * 100}%,
+              transparent 4px
             )`,
+            opacity: opacityMap[intensity] / 2,
           }}
           animate={{
             backgroundPosition: ["0 0", "0 4px"],
@@ -72,7 +73,7 @@ export const HolographicOverlay = ({ className = "", intensity = "subtle" }: Hol
         <div className="absolute bottom-0 right-0 h-full w-px bg-gradient-to-t from-accent/30 to-transparent" />
       </div>
 
-      {/* Holographic shimmer */}
+      {/* Holographic shimmer - using CSS vars for theme awareness */}
       {!shouldReduceMotion && (
         <motion.div
           className="absolute inset-0"
@@ -80,9 +81,9 @@ export const HolographicOverlay = ({ className = "", intensity = "subtle" }: Hol
             background: `linear-gradient(
               125deg,
               transparent 0%,
-              hsl(263 70% 65% / ${opacityMap[intensity]}) 25%,
+              hsl(var(--primary) / ${opacityMap[intensity]}) 25%,
               transparent 50%,
-              hsl(189 94% 43% / ${opacityMap[intensity]}) 75%,
+              hsl(var(--accent) / ${opacityMap[intensity]}) 75%,
               transparent 100%
             )`,
             backgroundSize: "400% 400%",
