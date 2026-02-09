@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Menu, X, Terminal } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { StatusIndicator } from "./effects/StatusIndicator";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -168,9 +169,10 @@ export const Navbar = () => {
             ))}
           </div>
 
-          {/* Status indicator */}
-          <div className="hidden md:flex items-center px-4">
+          {/* Status indicator & Theme toggle */}
+          <div className="hidden md:flex items-center gap-2 px-2">
             <StatusIndicator status="online" label="Available" />
+            <ThemeToggle />
           </div>
 
           {/* CTA Button */}
@@ -233,11 +235,12 @@ export const Navbar = () => {
               initial={shouldReduceMotion ? {} : { opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: navItems.length * 0.05 }}
-              className="pt-2"
+              className="pt-2 flex items-center gap-3"
             >
+              <ThemeToggle />
               <Link
                 to="/contact"
-                className="block w-full py-3 px-4 rounded-xl bg-gradient-to-r from-primary to-accent text-primary-foreground text-center font-medium"
+                className="block flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-primary to-accent text-primary-foreground text-center font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Let's Talk
