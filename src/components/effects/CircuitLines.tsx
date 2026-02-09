@@ -88,13 +88,13 @@ export const CircuitLines = ({ className = "", variant = "section" }: CircuitLin
         );
       })}
 
-      {/* Animated data pulse lines */}
+      {/* Animated data pulse lines - use CSS vars */}
       {!shouldReduceMotion && (
         <>
           <motion.div
             className="absolute top-1/4 left-0 right-0 h-px"
             style={{
-              background: "linear-gradient(90deg, transparent, hsl(189 94% 43% / 0.4), transparent)",
+              background: `linear-gradient(90deg, transparent, var(--circuit-pulse-color), transparent)`,
             }}
             animate={{
               x: ["-100%", "100%"],
@@ -109,7 +109,7 @@ export const CircuitLines = ({ className = "", variant = "section" }: CircuitLin
           <motion.div
             className="absolute top-3/4 left-0 right-0 h-px"
             style={{
-              background: "linear-gradient(90deg, transparent, hsl(263 70% 65% / 0.3), transparent)",
+              background: `linear-gradient(90deg, transparent, var(--circuit-pulse-alt), transparent)`,
             }}
             animate={{
               x: ["100%", "-100%"],

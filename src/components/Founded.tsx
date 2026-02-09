@@ -196,7 +196,7 @@ const DesktopEcosystemNode = ({
         <div
           className="absolute inset-0 rounded-2xl blur-xl"
           style={{
-            background: "radial-gradient(circle, hsl(263 70% 65% / 0.4), transparent 70%)",
+            background: `radial-gradient(circle, hsl(var(--node-glow) / var(--node-glow-opacity)), transparent 70%)`,
             transform: "scale(1.5)",
           }}
         />
@@ -206,10 +206,10 @@ const DesktopEcosystemNode = ({
       <div
         className="relative glass-card rounded-2xl p-5 min-w-[200px] border transition-all duration-300"
         style={{
-          borderColor: isHovered ? "hsl(263 70% 65% / 0.5)" : "hsl(0 0% 100% / 0.06)",
+          borderColor: isHovered ? "var(--card-border-hover)" : "var(--card-border-default)",
           boxShadow: isHovered
-            ? "0 0 40px hsl(263 70% 65% / 0.2), 0 8px 32px hsl(0 0% 0% / 0.4)"
-            : "0 4px 24px hsl(0 0% 0% / 0.3)",
+            ? "var(--card-shadow-hover)"
+            : "var(--card-shadow-default)",
         }}
       >
         {/* Pulse indicator */}
@@ -397,7 +397,7 @@ export const Founded = () => {
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] pointer-events-none"
         style={{
-          background: "radial-gradient(circle, hsl(263 70% 65% / 0.06) 0%, transparent 60%)",
+          background: `radial-gradient(circle, var(--ambient-glow) 0%, transparent 60%)`,
         }}
       />
 
@@ -473,8 +473,8 @@ export const Founded = () => {
               className="absolute inset-0 opacity-20"
               style={{
                 backgroundImage: `
-                  linear-gradient(90deg, hsl(263 70% 65% / 0.03) 1px, transparent 1px),
-                  linear-gradient(180deg, hsl(263 70% 65% / 0.03) 1px, transparent 1px)
+                  linear-gradient(90deg, var(--grid-line-color) 1px, transparent 1px),
+                  linear-gradient(180deg, var(--grid-line-color) 1px, transparent 1px)
                 `,
                 backgroundSize: "60px 60px",
               }}
@@ -519,7 +519,7 @@ export const Founded = () => {
         >
           <button
             onClick={() => navigate("/founded")}
-            className="group inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 rounded-full glass-card border border-primary/30 hover:border-primary/60 transition-all duration-300 hover:shadow-[0_0_40px_hsl(263_70%_65%_/_0.2)] active:scale-[0.98]"
+            className="group inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 rounded-full glass-card border border-primary/30 hover:border-primary/60 transition-all duration-300 hover:shadow-glow active:scale-[0.98]"
           >
             <span className="font-display font-medium text-foreground text-sm md:text-base">
               Explore Everything I've Founded
