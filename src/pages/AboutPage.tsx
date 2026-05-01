@@ -8,6 +8,7 @@ import { CircuitLines } from "@/components/effects/CircuitLines";
 import { GlowOrb } from "@/components/effects/GlowOrb";
 import { HolographicOverlay } from "@/components/effects/HolographicOverlay";
 import { CyberCard } from "@/components/ui/CyberCard";
+import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
 
 const timeline = [
   {
@@ -88,6 +89,13 @@ const AboutPage = () => {
 
   return (
     <PageTransition>
+      <SEO
+        title="About Hardik Tamkhane — Founder & Builder | Journey & Mission"
+        description="The story of Hardik Tamkhane: from coding at 11 to founding Fusion Interpreter and Cyvance Security. Discover the journey, mission, and milestones."
+        path="/about"
+        keywords="about Hardik Tamkhane, founder story, biography, journey, entrepreneur"
+        schema={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "About", path: "/about" }])}
+      />
       <Navbar />
       
       <main className="pt-32 pb-20">

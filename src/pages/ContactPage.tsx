@@ -13,6 +13,7 @@ import { TechButton } from "@/components/ui/TechButton";
 import { StatusIndicator } from "@/components/effects/StatusIndicator";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
 
 const contactInfo = [
   {
@@ -93,6 +94,13 @@ const ContactPage = () => {
 
   return (
     <PageTransition>
+      <SEO
+        title="Contact Hardik Tamkhane — Let's Build Something Together"
+        description="Get in touch with Hardik Tamkhane for web development, digital marketing, cybersecurity consulting, or partnership inquiries. Response within 24 hours."
+        path="/contact"
+        keywords="contact Hardik Tamkhane, hire developer, marketing consultation, cybersecurity expert"
+        schema={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])}
+      />
       <Navbar />
       
       <main className="pt-32 pb-20">

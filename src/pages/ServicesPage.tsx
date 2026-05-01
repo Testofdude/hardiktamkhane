@@ -10,6 +10,7 @@ import { GlowOrb } from "@/components/effects/GlowOrb";
 import { HolographicOverlay } from "@/components/effects/HolographicOverlay";
 import { CyberCard } from "@/components/ui/CyberCard";
 import { TechButton } from "@/components/ui/TechButton";
+import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
 
 const services = [
   {
@@ -65,6 +66,13 @@ const ServicesPage = () => {
 
   return (
     <PageTransition>
+      <SEO
+        title="Services — Web Development, Cybersecurity & Digital Marketing"
+        description="Premium services by Hardik Tamkhane: full-stack web development, cybersecurity audits, performance marketing, and growth engineering for startups & enterprises."
+        path="/services"
+        keywords="web development services, cybersecurity audit, digital marketing agency, performance marketing"
+        schema={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }])}
+      />
       <Navbar />
       
       <main className="pt-32 pb-20">

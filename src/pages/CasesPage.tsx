@@ -9,6 +9,7 @@ import { CircuitLines } from "@/components/effects/CircuitLines";
 import { GlowOrb } from "@/components/effects/GlowOrb";
 import { HolographicOverlay } from "@/components/effects/HolographicOverlay";
 import { CyberCard } from "@/components/ui/CyberCard";
+import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
 
 const categories = ["All", "Web Dev", "Security", "Marketing", "Startup"];
 
@@ -88,6 +89,13 @@ const CasesPage = () => {
 
   return (
     <PageTransition>
+      <SEO
+        title="Case Studies — Real Results in Web, Security & Marketing"
+        description="Explore case studies of Hardik Tamkhane: e-commerce builds, fintech security audits, SaaS growth campaigns, and startup launches with measurable outcomes."
+        path="/cases"
+        keywords="case studies, portfolio, web development cases, security audit results, marketing campaigns"
+        schema={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Cases", path: "/cases" }])}
+      />
       <Navbar />
       
       <main className="pt-32 pb-20">

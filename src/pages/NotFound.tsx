@@ -4,6 +4,7 @@ import { PageTransition } from "@/components/layout/PageTransition";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ArrowLeft, AlertTriangle } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const NotFound = () => {
   const location = useLocation();
@@ -14,6 +15,10 @@ const NotFound = () => {
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>404 — Page Not Found | Hardik Tamkhane</title>
+        <meta name="robots" content="noindex, follow" />
+      </Helmet>
       <Navbar />
       <main className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="text-center max-w-lg">

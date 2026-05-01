@@ -1,5 +1,6 @@
 import { Linkedin, Mail, Youtube, Terminal } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -24,15 +25,23 @@ export const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <nav className="flex gap-6" aria-label="Footer navigation">
-            {["About", "Skills", "Projects", "Contact"].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2" aria-label="Footer navigation">
+            {[
+              { label: "Home", to: "/" },
+              { label: "About", to: "/about" },
+              { label: "Services", to: "/services" },
+              { label: "Cases", to: "/cases" },
+              { label: "Founded", to: "/founded" },
+              { label: "Book", to: "/thepoweroffinancialclarity" },
+              { label: "Contact", to: "/contact" },
+            ].map((item) => (
+              <Link
+                key={item.label}
+                to={item.to}
                 className="text-sm text-muted-foreground hover:text-accent transition-colors font-mono"
               >
-                {item}
-              </a>
+                {item.label}
+              </Link>
             ))}
           </nav>
 
