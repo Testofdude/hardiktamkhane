@@ -11,6 +11,7 @@ import { HolographicOverlay } from "@/components/effects/HolographicOverlay";
 import { CyberCard } from "@/components/ui/CyberCard";
 import { TechButton } from "@/components/ui/TechButton";
 import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 const services = [
   {
@@ -242,6 +243,12 @@ const ServicesPage = () => {
             </CyberCard>
           </div>
         </section>
+
+        <RelatedLinks
+          links={["cases", "founded", "about", "book", "contact", "home"]}
+          heading="Related Pages"
+          subheading="See real outcomes, the ventures behind the work, and how to get in touch."
+        />
       </main>
 
       <Footer />

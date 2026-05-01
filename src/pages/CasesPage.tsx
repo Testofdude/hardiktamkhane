@@ -10,6 +10,7 @@ import { GlowOrb } from "@/components/effects/GlowOrb";
 import { HolographicOverlay } from "@/components/effects/HolographicOverlay";
 import { CyberCard } from "@/components/ui/CyberCard";
 import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 const categories = ["All", "Web Dev", "Security", "Marketing", "Startup"];
 
@@ -289,6 +290,12 @@ const CasesPage = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <RelatedLinks
+          links={["services", "founded", "about", "book", "contact", "home"]}
+          heading="Where to Next"
+          subheading="Explore the services behind these results or the ventures driving them."
+        />
       </main>
 
       <Footer />

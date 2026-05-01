@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { PageTransition } from "@/components/layout/PageTransition";
 import bookCover from "@/assets/book-cover.png";
 import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 // Physics-based spring config for Apple-like feel
 const springConfig = { stiffness: 100, damping: 30, mass: 1 };
@@ -1028,6 +1029,12 @@ const BookPage = () => {
 
         <LightSweep delay={1} />
       </section>
+
+      <RelatedLinks
+        links={["about", "founded", "services", "cases", "contact", "home"]}
+        heading="Beyond the Book"
+        subheading="Meet the author and explore the ventures, services, and ideas behind the writing."
+      />
 
       <Footer />
     </div>

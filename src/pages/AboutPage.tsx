@@ -9,6 +9,7 @@ import { GlowOrb } from "@/components/effects/GlowOrb";
 import { HolographicOverlay } from "@/components/effects/HolographicOverlay";
 import { CyberCard } from "@/components/ui/CyberCard";
 import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 const timeline = [
   {
@@ -271,6 +272,12 @@ const AboutPage = () => {
             </div>
           </div>
         </section>
+
+        <RelatedLinks
+          links={["services", "founded", "cases", "book", "contact", "home"]}
+          heading="Continue Exploring"
+          subheading="See the services offered, ventures founded, and proof of work."
+        />
       </main>
 
       <Footer />

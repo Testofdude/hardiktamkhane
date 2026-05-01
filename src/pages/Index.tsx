@@ -13,6 +13,7 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { SEO, organizationSchema, websiteSchema, personSchema, buildBreadcrumbSchema } from "@/components/SEO";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 const Index = () => {
   return (
@@ -37,6 +38,11 @@ const Index = () => {
         <Blog />
         <BookCTA />
         <Contact />
+        <RelatedLinks
+          links={["about", "services", "founded", "cases", "book", "contact"]}
+          heading="Explore the Ecosystem"
+          subheading="Dive deeper into the work, the story, and the systems being built."
+        />
       </main>
       <Footer />
     </PageTransition>

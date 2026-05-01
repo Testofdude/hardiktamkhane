@@ -14,6 +14,7 @@ import { StatusIndicator } from "@/components/effects/StatusIndicator";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 const contactInfo = [
   {
@@ -316,6 +317,12 @@ const ContactPage = () => {
             </div>
           </div>
         </section>
+
+        <RelatedLinks
+          links={["services", "cases", "founded", "about", "book", "home"]}
+          heading="Before You Reach Out"
+          subheading="Browse services, case studies, and ventures to find the right fit."
+        />
       </main>
 
       <Footer />
