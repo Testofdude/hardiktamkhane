@@ -9,6 +9,7 @@ import { PageTransition } from "@/components/layout/PageTransition";
 import { useIsMobile } from "@/hooks/use-mobile";
 import bookCover from "@/assets/book-cover.png";
 import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 interface Venture {
   id: string;
@@ -327,6 +328,12 @@ const FoundedPage = () => {
             </a>
           </motion.div>
         </div>
+
+        <RelatedLinks
+          links={["about", "services", "cases", "book", "contact", "home"]}
+          heading="Inside the Ecosystem"
+          subheading="Read the founder story, the services, and the proof of work."
+        />
       </main>
       <Footer />
     </PageTransition>
