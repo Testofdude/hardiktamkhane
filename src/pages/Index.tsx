@@ -12,10 +12,18 @@ import { BookCTA } from "@/components/BookCTA";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { PageTransition } from "@/components/layout/PageTransition";
+import { SEO, organizationSchema, websiteSchema, personSchema, buildBreadcrumbSchema } from "@/components/SEO";
 
 const Index = () => {
   return (
     <PageTransition>
+      <SEO
+        title="Hardik Tamkhane — Founder, Web Developer & Digital Marketer"
+        description="Founder of Fusion Interpreter & Cyvance Security. Full-stack developer, performance marketer, and cybersecurity builder shaping ecosystems in public."
+        path="/"
+        keywords="Hardik Tamkhane, Fusion Interpreter, Cyvance Security, founder, web developer, digital marketing, cybersecurity"
+        schema={[organizationSchema, websiteSchema, personSchema, buildBreadcrumbSchema([{ name: "Home", path: "/" }])]}
+      />
       <SkipToContent />
       <Navbar />
       <main id="main-content">
