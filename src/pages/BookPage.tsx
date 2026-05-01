@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { PageTransition } from "@/components/layout/PageTransition";
 import bookCover from "@/assets/book-cover.png";
+import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
 
 // Physics-based spring config for Apple-like feel
 const springConfig = { stiffness: 100, damping: 30, mass: 1 };
@@ -675,6 +676,14 @@ const BookPage = () => {
 
   return (
     <PageTransition>
+      <SEO
+        title="The Power of Financial Clarity — Book by Hardik Tamkhane"
+        description="A practical guide to financial clarity: master money psychology, build wealth systems, and make decisions with confidence. Book by Hardik Tamkhane."
+        path="/thepoweroffinancialclarity"
+        type="article"
+        keywords="financial clarity book, Hardik Tamkhane book, personal finance, money psychology, wealth building"
+        schema={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Book", path: "/thepoweroffinancialclarity" }])}
+      />
     <div ref={containerRef} className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
 
