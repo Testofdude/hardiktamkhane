@@ -68,6 +68,7 @@ export const pageBreadcrumbs: Record<string, BreadcrumbItem[]> = {
   "/services": [{ name: "Home", path: "/" }, { name: "Services", path: "/services" }],
   "/cases": [{ name: "Home", path: "/" }, { name: "Case Studies", path: "/cases" }],
   "/founded": [{ name: "Home", path: "/" }, { name: "Founded", path: "/founded" }],
+  "/features": [{ name: "Home", path: "/" }, { name: "Press & Featured", path: "/features" }],
   "/contact": [{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }],
   "/thepoweroffinancialclarity": [
     { name: "Home", path: "/" },
@@ -127,13 +128,35 @@ export const personSchema = {
   name: "Hardik Tamkhane",
   url: SITE_URL,
   image: `${SITE_URL}/profile.jpg`,
-  jobTitle: "Founder, Web Developer & Digital Marketer",
+  jobTitle: "Founder, Marketing Strategist & Developer",
+  description:
+    "Entrepreneur building ventures in marketing, cybersecurity, and AI.",
   worksFor: [
     { "@type": "Organization", name: "Fusion Interpreter" },
     { "@type": "Organization", name: "Cyvance Security" },
   ],
   sameAs: [
+    "https://entrepreneursofindia.com/hardik-tamkhane",
     "https://www.linkedin.com/in/hardik-tamkhane-003679340/",
+    "https://www.instagram.com/hardik_tamkhane/",
     "https://www.youtube.com/@Hardik_SMFCYA",
   ],
+};
+
+export const featuredArticleSchema = {
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  headline: "Hardik Tamkhane: Solving Real Problems Through Code and Strategy",
+  url: "https://entrepreneursofindia.com/hardik-tamkhane",
+  mainEntityOfPage: "https://entrepreneursofindia.com/hardik-tamkhane",
+  datePublished: "2026-05-04",
+  dateModified: "2026-05-04",
+  inLanguage: "en",
+  about: { "@type": "Person", name: "Hardik Tamkhane", url: SITE_URL },
+  author: { "@type": "Organization", name: "Entrepreneurs of India" },
+  publisher: {
+    "@type": "Organization",
+    name: "Entrepreneurs of India",
+    logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` },
+  },
 };
