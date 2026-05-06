@@ -13,7 +13,8 @@ import { TechButton } from "@/components/ui/TechButton";
 import { StatusIndicator } from "@/components/effects/StatusIndicator";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
+import { SEO, buildBreadcrumbSchema, pageBreadcrumbs } from "@/components/SEO";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedLinks } from "@/components/RelatedLinks";
 
 const contactInfo = [
@@ -100,10 +101,11 @@ const ContactPage = () => {
         description="Get in touch with Hardik Tamkhane for web development, digital marketing, cybersecurity consulting, or partnership inquiries. Response within 24 hours."
         path="/contact"
         keywords="contact Hardik Tamkhane, hire developer, marketing consultation, cybersecurity expert"
-        schema={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])}
+        schema={buildBreadcrumbSchema(pageBreadcrumbs["/contact"])}
       />
       <Navbar />
-      
+      <Breadcrumbs items={pageBreadcrumbs["/contact"]} />
+
       <main className="pt-32 pb-20">
         <section ref={ref} className="relative overflow-hidden py-20">
           <div className="absolute inset-0 -z-10">

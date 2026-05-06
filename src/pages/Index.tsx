@@ -12,7 +12,7 @@ import { BookCTA } from "@/components/BookCTA";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { PageTransition } from "@/components/layout/PageTransition";
-import { SEO, organizationSchema, websiteSchema, personSchema, buildBreadcrumbSchema } from "@/components/SEO";
+import { SEO, organizationSchema, websiteSchema, personSchema, buildBreadcrumbSchema, pageBreadcrumbs } from "@/components/SEO";
 import { RelatedLinks } from "@/components/RelatedLinks";
 
 const Index = () => {
@@ -23,7 +23,7 @@ const Index = () => {
         description="Founder of Fusion Interpreter & Cyvance Security. Full-stack developer, performance marketer, and cybersecurity builder shaping ecosystems in public."
         path="/"
         keywords="Hardik Tamkhane, Fusion Interpreter, Cyvance Security, founder, web developer, digital marketing, cybersecurity"
-        schema={[organizationSchema, websiteSchema, personSchema, buildBreadcrumbSchema([{ name: "Home", path: "/" }])]}
+        schema={[organizationSchema, websiteSchema, personSchema, buildBreadcrumbSchema(pageBreadcrumbs["/"])]}
       />
       <SkipToContent />
       <Navbar />

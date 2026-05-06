@@ -8,7 +8,8 @@ import { CircuitLines } from "@/components/effects/CircuitLines";
 import { GlowOrb } from "@/components/effects/GlowOrb";
 import { HolographicOverlay } from "@/components/effects/HolographicOverlay";
 import { CyberCard } from "@/components/ui/CyberCard";
-import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
+import { SEO, buildBreadcrumbSchema, pageBreadcrumbs } from "@/components/SEO";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedLinks } from "@/components/RelatedLinks";
 
 const timeline = [
@@ -95,10 +96,11 @@ const AboutPage = () => {
         description="The story of Hardik Tamkhane: from coding at 11 to founding Fusion Interpreter and Cyvance Security. Discover the journey, mission, and milestones."
         path="/about"
         keywords="about Hardik Tamkhane, founder story, biography, journey, entrepreneur"
-        schema={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "About", path: "/about" }])}
+        schema={buildBreadcrumbSchema(pageBreadcrumbs["/about"])}
       />
       <Navbar />
-      
+      <Breadcrumbs items={pageBreadcrumbs["/about"]} />
+
       <main className="pt-32 pb-20">
         {/* Hero Section */}
         <section ref={heroRef} className="relative overflow-hidden py-20">

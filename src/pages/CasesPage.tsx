@@ -9,7 +9,8 @@ import { CircuitLines } from "@/components/effects/CircuitLines";
 import { GlowOrb } from "@/components/effects/GlowOrb";
 import { HolographicOverlay } from "@/components/effects/HolographicOverlay";
 import { CyberCard } from "@/components/ui/CyberCard";
-import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
+import { SEO, buildBreadcrumbSchema, pageBreadcrumbs } from "@/components/SEO";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedLinks } from "@/components/RelatedLinks";
 
 const categories = ["All", "Web Dev", "Security", "Marketing", "Startup"];
@@ -95,10 +96,11 @@ const CasesPage = () => {
         description="Explore case studies of Hardik Tamkhane: e-commerce builds, fintech security audits, SaaS growth campaigns, and startup launches with measurable outcomes."
         path="/cases"
         keywords="case studies, portfolio, web development cases, security audit results, marketing campaigns"
-        schema={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Cases", path: "/cases" }])}
+        schema={buildBreadcrumbSchema(pageBreadcrumbs["/cases"])}
       />
       <Navbar />
-      
+      <Breadcrumbs items={pageBreadcrumbs["/cases"]} />
+
       <main className="pt-32 pb-20">
         {/* Hero Section */}
         <section ref={heroRef} className="relative overflow-hidden py-20">

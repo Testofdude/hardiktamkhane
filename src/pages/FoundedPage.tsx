@@ -8,7 +8,8 @@ import { GlowOrb } from "@/components/effects/GlowOrb";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { useIsMobile } from "@/hooks/use-mobile";
 import bookCover from "@/assets/book-cover.png";
-import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
+import { SEO, buildBreadcrumbSchema, pageBreadcrumbs } from "@/components/SEO";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedLinks } from "@/components/RelatedLinks";
 
 interface Venture {
@@ -215,9 +216,10 @@ const FoundedPage = () => {
         description="The complete ecosystem founded by Hardik Tamkhane: Cyvance Security, Fusion Interpreter, newsletters, AI products, and systems built in public."
         path="/founded"
         keywords="ventures, startups, Cyvance Security, Fusion Interpreter, ecosystem, founder portfolio"
-        schema={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Founded", path: "/founded" }])}
+        schema={buildBreadcrumbSchema(pageBreadcrumbs["/founded"])}
       />
       <Navbar />
+      <Breadcrumbs items={pageBreadcrumbs["/founded"]} className="pt-24 pb-0" />
       <main className="min-h-screen pt-20 relative overflow-hidden">
         {/* Background effects - reduced on mobile */}
         {!isMobile && <CircuitLines />}
