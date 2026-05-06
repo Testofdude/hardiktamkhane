@@ -10,7 +10,8 @@ import { GlowOrb } from "@/components/effects/GlowOrb";
 import { HolographicOverlay } from "@/components/effects/HolographicOverlay";
 import { CyberCard } from "@/components/ui/CyberCard";
 import { TechButton } from "@/components/ui/TechButton";
-import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
+import { SEO, buildBreadcrumbSchema, pageBreadcrumbs } from "@/components/SEO";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedLinks } from "@/components/RelatedLinks";
 
 const services = [
@@ -72,10 +73,11 @@ const ServicesPage = () => {
         description="Premium services by Hardik Tamkhane: full-stack web development, cybersecurity audits, performance marketing, and growth engineering for startups & enterprises."
         path="/services"
         keywords="web development services, cybersecurity audit, digital marketing agency, performance marketing"
-        schema={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }])}
+        schema={buildBreadcrumbSchema(pageBreadcrumbs["/services"])}
       />
       <Navbar />
-      
+      <Breadcrumbs items={pageBreadcrumbs["/services"]} />
+
       <main className="pt-32 pb-20">
         {/* Hero Section */}
         <section ref={heroRef} className="relative overflow-hidden py-20">

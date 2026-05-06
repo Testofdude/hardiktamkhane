@@ -5,7 +5,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { PageTransition } from "@/components/layout/PageTransition";
 import bookCover from "@/assets/book-cover.png";
-import { SEO, buildBreadcrumbSchema } from "@/components/SEO";
+import { SEO, buildBreadcrumbSchema, pageBreadcrumbs } from "@/components/SEO";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedLinks } from "@/components/RelatedLinks";
 
 // Physics-based spring config for Apple-like feel
@@ -683,10 +684,11 @@ const BookPage = () => {
         path="/thepoweroffinancialclarity"
         type="article"
         keywords="financial clarity book, Hardik Tamkhane book, personal finance, money psychology, wealth building"
-        schema={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Book", path: "/thepoweroffinancialclarity" }])}
+        schema={buildBreadcrumbSchema(pageBreadcrumbs["/thepoweroffinancialclarity"])}
       />
     <div ref={containerRef} className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
+      <Breadcrumbs items={pageBreadcrumbs["/thepoweroffinancialclarity"]} />
 
       {/* Floating Navigation */}
       <motion.nav

@@ -59,7 +59,23 @@ export const SEO = ({
   );
 };
 
-export const buildBreadcrumbSchema = (items: { name: string; path: string }[]) => ({
+export type BreadcrumbItem = { name: string; path: string };
+
+// Centralized breadcrumb trails so visible UI and JSON-LD stay in sync.
+export const pageBreadcrumbs: Record<string, BreadcrumbItem[]> = {
+  "/": [{ name: "Home", path: "/" }],
+  "/about": [{ name: "Home", path: "/" }, { name: "About", path: "/about" }],
+  "/services": [{ name: "Home", path: "/" }, { name: "Services", path: "/services" }],
+  "/cases": [{ name: "Home", path: "/" }, { name: "Case Studies", path: "/cases" }],
+  "/founded": [{ name: "Home", path: "/" }, { name: "Founded", path: "/founded" }],
+  "/contact": [{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }],
+  "/thepoweroffinancialclarity": [
+    { name: "Home", path: "/" },
+    { name: "The Power of Financial Clarity", path: "/thepoweroffinancialclarity" },
+  ],
+};
+
+export const buildBreadcrumbSchema = (items: BreadcrumbItem[]) => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: items.map((item, i) => ({
