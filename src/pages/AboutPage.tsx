@@ -125,10 +125,19 @@ const AboutPage = () => {
               <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
                 <span className="gradient-text">Hardik Tamkhane</span>
               </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed mb-8 max-w-2xl">
+              <p className="text-xl text-muted-foreground leading-relaxed mb-6 max-w-2xl">
                 From publishing my first book to founding two startups—driven by 
                 execution, not just ideas. I build at the intersection of code, 
                 security, and growth.
+              </p>
+              <p className="text-sm md:text-base text-foreground/80 mb-8 max-w-2xl">
+                <Link
+                  to="/features"
+                  className="story-link font-medium text-foreground hover:text-accent transition-colors"
+                >
+                  Featured in <span className="gradient-text font-semibold">Entrepreneurs of India</span>
+                </Link>
+                {" "}for work in performance marketing and cybersecurity.
               </p>
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-2">
