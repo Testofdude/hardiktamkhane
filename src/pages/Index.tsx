@@ -31,6 +31,7 @@ const Index = () => {
       <main id="main-content">
         <Hero />
         <Founded />
+        <FeaturedInStrip />
         <About />
         <Skills />
         <Projects />
@@ -40,7 +41,7 @@ const Index = () => {
         <BookCTA />
         <Contact />
         <RelatedLinks
-          links={["about", "services", "founded", "cases", "book", "contact"]}
+          links={["about", "services", "founded", "cases", "features", "book", "contact"]}
           heading="Explore the Ecosystem"
           subheading="Dive deeper into the work, the story, and the systems being built."
         />
