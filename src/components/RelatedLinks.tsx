@@ -53,6 +53,12 @@ const ALL_LINKS: Record<string, RelatedLink> = {
     href: "/contact",
     anchor: "Get in touch with Hardik Tamkhane",
   },
+  features: {
+    title: "Press & Featured",
+    description: "Media mentions and recognition — including the feature in Entrepreneurs of India.",
+    href: "/features",
+    anchor: "See press mentions and featured coverage",
+  },
 };
 
 interface RelatedLinksProps {
