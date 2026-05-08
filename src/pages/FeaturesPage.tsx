@@ -16,7 +16,7 @@ import { RelatedLinks } from "@/components/RelatedLinks";
 import { PressLogo } from "@/components/press/PressLogo";
 import { pressMentions, type PressMention } from "@/data/press";
 
-const SITE_URL = "https://hardiktamkhane.com";
+const SITE_URL = "https://hardiktamkhane.me";
 
 const PAGE_PATH = "/features";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
