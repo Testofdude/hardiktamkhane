@@ -18,33 +18,61 @@ import { pressMentions, type PressMention } from "@/data/press";
 
 const SITE_URL = "https://hardiktamkhane.com";
 
+const PAGE_PATH = "/features";
+const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
+const PERSON_ID = `${SITE_URL}/#person`;
+
 const buildArticleSchema = (m: PressMention) => ({
   "@context": "https://schema.org",
   "@type": "NewsArticle",
+  "@id": `${m.url}#article`,
   headline: m.title,
+  name: m.title,
   url: m.url,
-  mainEntityOfPage: m.url,
+  mainEntityOfPage: { "@type": "WebPage", "@id": m.url },
   datePublished: m.date,
   dateModified: m.date,
   inLanguage: "en",
-  about: {
-    "@type": "Person",
-    name: "Hardik Tamkhane",
-    url: SITE_URL,
-  },
-  author: {
-    "@type": "Organization",
-    name: m.publication,
-  },
+  isAccessibleForFree: true,
+  about: { "@type": "Person", "@id": PERSON_ID, name: "Hardik Tamkhane", url: SITE_URL },
+  mentions: { "@type": "Person", "@id": PERSON_ID },
+  author: { "@type": "Organization", name: m.publication },
   publisher: {
     "@type": "Organization",
     name: m.publication,
-    logo: {
-      "@type": "ImageObject",
-      url: `${SITE_URL}/logo.png`,
-    },
+    logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` },
   },
   description: m.description,
+});
+
+const buildItemListSchema = (mentions: PressMention[]) => ({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": `${PAGE_URL}#press-list`,
+  name: "Press & Media Mentions of Hardik Tamkhane",
+  numberOfItems: mentions.length,
+  itemListOrder: "https://schema.org/ItemListOrderDescending",
+  itemListElement: mentions.map((m, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    url: m.url,
+    item: { "@id": `${m.url}#article` },
+  })),
+});
+
+const buildWebPageSchema = (mentions: PressMention[]) => ({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${PAGE_URL}#webpage`,
+  url: PAGE_URL,
+  name: "Press & Featured In — Hardik Tamkhane",
+  description:
+    "Curated media mentions and press coverage of Hardik Tamkhane.",
+  inLanguage: "en",
+  isPartOf: { "@type": "WebSite", url: SITE_URL, name: "Hardik Tamkhane" },
+  about: { "@type": "Person", "@id": PERSON_ID, name: "Hardik Tamkhane", url: SITE_URL },
+  mainEntity: { "@id": `${PAGE_URL}#press-list` },
+  hasPart: mentions.map((m) => ({ "@id": `${m.url}#article` })),
 });
 
 const FeaturesPage = () => {
@@ -63,6 +91,8 @@ const FeaturesPage = () => {
         keywords="Hardik Tamkhane press, featured in, media mentions, Entrepreneurs of India"
         schema={[
           buildBreadcrumbSchema(pageBreadcrumbs["/features"]),
+          buildWebPageSchema(pressMentions),
+          buildItemListSchema(pressMentions),
           ...pressMentions.map(buildArticleSchema),
         ]}
       />
