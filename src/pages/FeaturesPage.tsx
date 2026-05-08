@@ -91,6 +91,8 @@ const FeaturesPage = () => {
         keywords="Hardik Tamkhane press, featured in, media mentions, Entrepreneurs of India"
         schema={[
           buildBreadcrumbSchema(pageBreadcrumbs["/features"]),
+          buildWebPageSchema(pressMentions),
+          buildItemListSchema(pressMentions),
           ...pressMentions.map(buildArticleSchema),
         ]}
       />
