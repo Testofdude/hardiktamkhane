@@ -36,7 +36,7 @@ const App = () => (
             <Route path="/thepoweroffinancialclarity" element={<BookPage />} />
             <Route path="/founded" element={<FoundedPage />} />
             <Route path="/features" element={<FeaturesPage />} />
-            <Route path="/press" element={<FeaturesPage />} />
+            <Route path="/press" element={<Navigate to="/features" replace />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
