@@ -82,7 +82,7 @@ export const BentoHero = () => {
             </div>
 
             <div>
-              <h1 className="font-editorial font-extrabold tracking-[-0.04em] leading-[0.82] text-[13vw] md:text-[7.5vw] lg:text-[6.2vw] uppercase">
+              <h1 className="font-editorial font-extrabold tracking-[-0.04em] leading-[0.85] text-[13vw] md:text-[8vw] lg:text-[5.2vw] uppercase">
                 <span className="block">Hardik</span>
                 <span className="block">
                   Tamkha<span style={{ color: EMBER }}>n</span>e<span style={{ color: EMBER }}>.</span>
