@@ -124,7 +124,7 @@ export const BentoHero = () => {
               <Sparkles className="w-4 h-4" />
             </div>
             <div>
-              <div className="font-editorial font-extrabold tracking-[-0.05em] leading-none text-[22vw] md:text-[10vw] lg:text-[8vw]">
+              <div className="font-editorial font-extrabold tracking-[-0.05em] leading-none text-[22vw] md:text-[9vw] lg:text-[6.5vw]">
                 35<span className="align-top text-[0.5em]">+</span>
               </div>
               <p className="mt-2 text-sm font-medium max-w-[14ch]">
