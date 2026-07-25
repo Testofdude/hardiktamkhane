@@ -1,6 +1,6 @@
 import { SkipToContent } from "@/components/SkipToContent";
 import { Navbar } from "@/components/Navbar";
-import { Hero } from "@/components/Hero";
+import { BentoHero } from "@/components/BentoHero";
 import { Founded } from "@/components/Founded";
 import { About } from "@/components/About";
 import { Skills } from "@/components/Skills";
@@ -12,6 +12,7 @@ import { BookCTA } from "@/components/BookCTA";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { PageTransition } from "@/components/layout/PageTransition";
+import { CinematicIntro } from "@/components/layout/CinematicIntro";
 import { SEO, organizationSchema, websiteSchema, personSchema, featuredArticleSchema, buildBreadcrumbSchema, pageBreadcrumbs } from "@/components/SEO";
 import { RelatedLinks } from "@/components/RelatedLinks";
 import { FeaturedInStrip } from "@/components/press/FeaturedInStrip";
@@ -19,6 +20,7 @@ import { FeaturedInStrip } from "@/components/press/FeaturedInStrip";
 const Index = () => {
   return (
     <PageTransition>
+      <CinematicIntro />
       <SEO
         title="Hardik Tamkhane — Founder, Web Developer & Digital Marketer"
         description="Founder of Fusion Interpreter & Cyvance Security. Full-stack developer, performance marketer, and cybersecurity builder shaping ecosystems in public."
@@ -29,7 +31,7 @@ const Index = () => {
       <SkipToContent />
       <Navbar />
       <main id="main-content">
-        <Hero />
+        <BentoHero />
         <Founded />
         <FeaturedInStrip />
         <About />
