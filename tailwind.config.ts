@@ -17,6 +17,8 @@ export default {
         display: ["Sora", "system-ui", "sans-serif"],
         body: ["Outfit", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
+        editorial: ["Syne", "system-ui", "sans-serif"],
+        editorialBody: ["'Plus Jakarta Sans'", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
